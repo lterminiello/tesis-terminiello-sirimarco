@@ -1,0 +1,15 @@
+{
+  "rooms": [
+    {
+      "artifacts": [
+        {
+          "type_artifact": "LIGHT",
+          "name": "puta",
+          "pin": "GPIO_1",
+          "id_board": "raspberry"
+        }
+      ],
+      "name": "puta"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+[
+	{
+		"from":"BUE",
+		"to":"SAO"
+	},
+	{
+		"from":"BUE",
+		"to":"CUN"
+	},
+	{	
+		"from":"BUE",
+		"to":"MIA"
+	},
+	{
+		"from":"SAO",
+		"to":"RIO"
+	},
+	{
+		"from":"RIO",
+		"to":"SSA"
+	},
+		{
+		"from":"RIO",
+		"to":"SAO"
+	},
+	{
+		"from":"SAO",
+		"to":"CUN"
+	},
+	{	
+		"from":"CUN",
+		"to":"MIA"
+	},
+	{
+		"from":"SSA",
+		"to":"RIO"
+	},
+	{
+		"from":"RIO",
+		"to":"BUE"
+	}
+	
+]

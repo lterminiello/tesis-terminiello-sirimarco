@@ -20,7 +20,7 @@ public class App {
 		dispatcherServlet.setContextConfigLocation("classpath:application-context.xml");
 
 		ServletContextHandler handler = new ServletContextHandler(NO_SESSIONS);
-		//handler.setContextPath("/despegar-it-jav");
+		//handler.setContextPath("/algunpath");
 		handler.addServlet(new ServletHolder(dispatcherServlet), "/*");
 
 		Server server = new Server();

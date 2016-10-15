@@ -40,6 +40,12 @@ public class HomeController {
         return new ResponseEntity<String>((response), HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value = "/houseScheme", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<House> actionRoom() {
+        return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);
+    }
+
 
 //TODO ejemplo de multiplicacion de potencia para el controlador
 /*    @RequestMapping(value = "/bedroom", method = RequestMethod.GET)*/

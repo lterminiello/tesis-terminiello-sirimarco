@@ -14,7 +14,7 @@ import server.home.model.TypeArtifact;
 public class ControllerFactory {
 
     public static ControllerInterface getController(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard) {
-        return idBoard.equals("raspberry")?getControllerRasp(typeArtifact,pin,idBoard):getControllerNodeMCU(typeArtifact,pin,idBoard);
+        return idBoard.equals(Constants.RASPBERRY)?getControllerRasp(typeArtifact,pin,idBoard):getControllerNodeMCU(typeArtifact,pin,idBoard);
     }
 
     private static ControllerInterface getControllerRasp(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){

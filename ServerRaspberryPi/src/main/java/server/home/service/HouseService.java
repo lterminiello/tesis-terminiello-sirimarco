@@ -1,5 +1,6 @@
 package server.home.service;
 
+import server.home.json.JsonFactory;
 import server.home.model.House;
 import server.home.utils.HouseJsonLoader;
 
@@ -9,9 +10,12 @@ import server.home.utils.HouseJsonLoader;
 public class HouseService {
 
     private House house;
+    private JsonFactory jsonFactory;
 
-    public HouseService() {
+    public HouseService(JsonFactory jsonFactory) {
+        this.jsonFactory = jsonFactory;
         this.house = HouseJsonLoader.getSchemeHouse();
+
     }
 
     public House getHouse() {
@@ -21,4 +25,13 @@ public class HouseService {
     public void setHouse(House house) {
         this.house = house;
     }
+
+    public JsonFactory getJsonFactory() {
+        return jsonFactory;
+    }
+
+    public void setJsonFactory(JsonFactory jsonFactory) {
+        this.jsonFactory = jsonFactory;
+    }
+
 }

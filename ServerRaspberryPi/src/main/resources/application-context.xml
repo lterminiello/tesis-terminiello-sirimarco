@@ -13,7 +13,9 @@
           class="server.home.json.JsonFactory"/>
 
     <bean id="houseService"
-          class="server.home.service.HouseService"/>
+          class="server.home.service.HouseService">
+        <constructor-arg ref="jsonFactory"/>
+    </bean>
 
     <bean id="homeController"
           class="server.home.controller.HomeController">

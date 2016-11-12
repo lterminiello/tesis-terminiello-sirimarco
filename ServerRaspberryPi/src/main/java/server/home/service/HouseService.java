@@ -11,10 +11,12 @@ public class HouseService {
 
     private House house;
     private JsonFactory jsonFactory;
+    private HouseJsonLoader houseJsonLoader;
 
-    public HouseService(JsonFactory jsonFactory) {
+    public HouseService(JsonFactory jsonFactory,HouseJsonLoader houseJsonLoader) {
         this.jsonFactory = jsonFactory;
-        this.house = HouseJsonLoader.getSchemeHouse();
+        this.houseJsonLoader = houseJsonLoader;
+        this.house = houseJsonLoader.getSchemeHouse();
 
     }
 
@@ -32,6 +34,19 @@ public class HouseService {
 
     public void setJsonFactory(JsonFactory jsonFactory) {
         this.jsonFactory = jsonFactory;
+    }
+
+    public HouseJsonLoader getHouseJsonLoader() {
+        return houseJsonLoader;
+    }
+
+    public void setHouseJsonLoader(HouseJsonLoader houseJsonLoader) {
+        this.houseJsonLoader = houseJsonLoader;
+    }
+
+    public void setHouseScheme(String jsonHouse){
+        houseJsonLoader.setSchemeHouse(jsonHouse);
+        this.house = houseJsonLoader.getSchemeHouse();
     }
 
 }

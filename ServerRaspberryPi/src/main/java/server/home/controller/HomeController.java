@@ -11,10 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
 @RequestMapping("/house")
 public class HomeController {
@@ -42,7 +38,10 @@ public class HomeController {
 
     @RequestMapping(value = "/houseScheme", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<House> actionRoom() {
+    public ResponseEntity<House> houseScheme(@RequestParam(value = "scheme", required = false) String scheme) {
+        if(scheme != null){
+            houseService.setHouseScheme(scheme);
+        }
         return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);
     }
 
@@ -129,7 +128,7 @@ public class HomeController {
 
     @ExceptionHandler(NotAllowedActionExeption.class)
     public ResponseEntity<ErrorApi>
-    handleCityNotFoundException(NotAllowedActionExeption ex) {
+    handleNotAllowedActionException(NotAllowedActionExeption ex) {
         LOGGER.error(ex.getMessage(), ex);
         return new ResponseEntity<ErrorApi>(new ErrorApi("400", ex.getMessage()),
                 HttpStatus.BAD_REQUEST);

@@ -12,14 +12,27 @@
     <bean id="jsonFactory"
           class="server.home.json.JsonFactory"/>
 
+    <bean id="houseJsonLoader"
+          class="server.home.utils.HouseJsonLoader"/>
+
     <bean id="houseService"
           class="server.home.service.HouseService">
         <constructor-arg ref="jsonFactory"/>
+        <constructor-arg ref="houseJsonLoader"/>
+    </bean>
+
+    <bean id="announcementService"
+          class="server.home.service.AnnouncementService">
     </bean>
 
     <bean id="homeController"
           class="server.home.controller.HomeController">
         <constructor-arg ref="houseService"/>
+    </bean>
+
+    <bean id="announcementController"
+          class="server.home.controller.AnnouncementController">
+        <constructor-arg ref="announcementService"/>
     </bean>
 
     <bean id="webConfig" class="server.home.WebConfig">

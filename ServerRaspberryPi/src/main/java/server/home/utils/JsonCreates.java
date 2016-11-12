@@ -4,20 +4,35 @@ import com.pi4j.io.gpio.RaspiPin;
 import server.home.json.JsonFactory;
 import server.home.model.*;
 
+import java.io.IOException;
+import java.net.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * Created by lterminiello on 11/10/16.
  */
 public class JsonCreates {
 
-    public static void main(String[] args) {
-        ArrayList<Artifact> artifacts = new ArrayList<>();
-        ArrayList<Room> rooms = new ArrayList<>();
-        Artifact a = new Artifact(TypeArtifact.LIGHT, "raspberry", PinRaspberry.GPIO_1, "puta");
-        Room room = new Room(artifacts,"puta");
-        rooms.add(room);
-        artifacts.add(a);
-        System.out.println(new JsonFactory().toJson(new House(rooms)));
+    public static void main(String[] args) throws IOException {
+        int timeout = 100;
+        for (int i = 1; i < 255; i++) {
+            String host = "10.221.20." + i;
+            if (isReachableByTcp(host,3047,100)) {
+                System.out.println(host + " is reachable");
+            }
+        }
+    }
+
+    public static boolean isReachableByTcp(String host, int port, int timeout) {
+        try {
+            Socket socket = new Socket();
+            SocketAddress socketAddress = new InetSocketAddress(host, port);
+            socket.connect(socketAddress, timeout);
+            socket.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }

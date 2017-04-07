@@ -39,7 +39,7 @@ public class HomeController {
     @RequestMapping(value = "/houseScheme", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<House> houseScheme(@RequestParam(value = "scheme", required = false) String scheme) {
-        if(scheme != null){
+        if (scheme != null) {
             houseService.setHouseScheme(scheme);
         }
         return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);

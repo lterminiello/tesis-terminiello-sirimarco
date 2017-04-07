@@ -1,4 +1,4 @@
-package server.home.controller.board.type;
+package server.home.board.type;
 
 /**
  * Created by default on 08/10/16.

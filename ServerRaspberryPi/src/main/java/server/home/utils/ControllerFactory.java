@@ -1,10 +1,8 @@
 package server.home.utils;
 
-import com.pi4j.io.gpio.Pin;
-import com.pi4j.io.gpio.RaspiPin;
-import server.home.controller.board.node.mcu.ControllerLightNodeMCU;
-import server.home.controller.board.rasp.ControllerLightRasp;
-import server.home.controller.board.type.ControllerInterface;
+import server.home.board.node.mcu.ControllerLightNodeMCU;
+import server.home.board.rasp.ControllerLightRasp;
+import server.home.board.AbstractController;
 import server.home.model.PinRaspberry;
 import server.home.model.TypeArtifact;
 
@@ -13,15 +11,15 @@ import server.home.model.TypeArtifact;
  */
 public class ControllerFactory {
 
-    public static ControllerInterface getController(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard) {
+    public static AbstractController getController(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard) {
         return idBoard.equals(Constants.RASPBERRY)?getControllerRasp(typeArtifact,pin,idBoard):getControllerNodeMCU(typeArtifact,pin,idBoard);
     }
 
-    private static ControllerInterface getControllerRasp(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){
-        ControllerInterface controllerInterface = null;
+    private static AbstractController getControllerRasp(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){
+        AbstractController abstractController = null;
         switch (typeArtifact) {
             case LIGHT:
-                controllerInterface = new ControllerLightRasp();
+                abstractController = ControllerLightRasp.getInstance();
                 break;
             case DIMMER:
                 break;
@@ -34,15 +32,16 @@ public class ControllerFactory {
             case OTHER:
 
         }
-        return controllerInterface;
+        return abstractController;
     }
 
 
 
-    private static ControllerInterface getControllerNodeMCU(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){
-        ControllerInterface controllerInterface = null;
+    private static AbstractController getControllerNodeMCU(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){
+        AbstractController abstractController = null;
         switch (typeArtifact) {
             case LIGHT:
+                abstractController = ControllerLightNodeMCU.getInstance();
                 break;
             case DIMMER:
                 break;
@@ -55,7 +54,7 @@ public class ControllerFactory {
             case OTHER:
                 return null;
         }
-        return controllerInterface;
+        return abstractController;
     }
 
 }

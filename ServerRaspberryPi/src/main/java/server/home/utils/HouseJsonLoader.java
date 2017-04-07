@@ -12,6 +12,8 @@ import java.io.*;
  */
 public class HouseJsonLoader {
 
+
+    //TODO ver donde se pone el archivo cuando se genera el jar, ejecutandolo por ide esta dentro de la carpeta target
     public House getSchemeHouse(){
         InputStream inputStream = HouseJsonLoader.class.getResourceAsStream("/HouseScheme.json");
         return new JsonFactory().fromJson(new InputStreamReader(inputStream),new TypeReference<House>() {});

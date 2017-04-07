@@ -15,10 +15,21 @@ import java.util.Enumeration;
 public class JsonCreates {
 
     public static void main(String[] args) throws IOException {
+        HouseJsonLoader houseJsonLoader = new HouseJsonLoader();
+        House house = houseJsonLoader.getSchemeHouse();
+        Room room = house.getRooms().get(0);
+        room.setName("cucaaaa");
+        house.addRoom(room);
+        houseJsonLoader.setSchemeHouse(new JsonFactory().toJson(house));
+    }
+
+
+    //TODO esto es para el lado de la app, queda aca de modo ejemplo
+    public void getIpServer() {
         int timeout = 100;
-        for (int i = 1; i < 255; i++) {
-            String host = "10.221.20." + i;
-            if (isReachableByTcp(host,3047,100)) {
+        for (int i = 1; i < 254; i++) {
+            String host = "192.168.0." + i;
+            if (isReachableByTcp(host, 8443, 100)) {
                 System.out.println(host + " is reachable");
             }
         }

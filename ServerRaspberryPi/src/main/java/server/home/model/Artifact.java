@@ -1,10 +1,9 @@
 package server.home.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pi4j.io.gpio.Pin;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
-import server.home.controller.board.type.ControllerInterface;
+import server.home.board.AbstractController;
 import server.home.exeption.NotAllowedActionExeption;
 import server.home.utils.ControllerFactory;
 
@@ -21,7 +20,7 @@ public class Artifact {
     private PinRaspberry pin;
     private String idBoard;
     @JsonIgnore
-    private ControllerInterface controller;
+    private AbstractController controller;
     @JsonIgnore
     private Class paramPower[] = {Integer.TYPE};
     @JsonIgnore
@@ -71,11 +70,11 @@ public class Artifact {
         this.typeArtifact = typeArtifact;
     }
 
-    public ControllerInterface getController() {
+    public AbstractController getController() {
         return controller;
     }
 
-    public void setController(ControllerInterface controller) {
+    public void setController(AbstractController controller) {
         this.controller = controller;
     }
 

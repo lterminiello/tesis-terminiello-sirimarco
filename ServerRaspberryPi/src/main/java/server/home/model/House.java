@@ -28,6 +28,10 @@ public class House {
         this.rooms = rooms;
     }
 
+    public void addRoom(Room room){
+        this.rooms.add(room);
+    }
+
     public Room getRoom(String name) {
         Optional<Room> optional = this.rooms.stream().filter(x -> x.getName().equals(name)).findFirst();
         if (!optional.isPresent()){

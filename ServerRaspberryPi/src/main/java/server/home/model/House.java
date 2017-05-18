@@ -1,6 +1,5 @@
 package server.home.model;
 
-import server.home.exeption.UnknownArtifactExeption;
 import server.home.exeption.UnknownRoomExeption;
 
 import java.util.List;

@@ -15,4 +15,9 @@ public class ControllerBlindRasp extends AbstractController {
         }
         return abstractController;
     }
+
+    @Override
+    public String getState() {
+        return "";
+    }
 }

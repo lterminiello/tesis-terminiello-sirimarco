@@ -9,6 +9,7 @@ import server.home.board.type.ControllerLightInterface;
 public class ControllerLightRasp extends AbstractController implements ControllerLightInterface{
 
     private static AbstractController abstractController;
+    private String state ="off";
 
     public static AbstractController getInstance() {
         if (abstractController == null){
@@ -19,11 +20,18 @@ public class ControllerLightRasp extends AbstractController implements Controlle
 
     @Override
     public String on() {
+        state = "on";
         return "on";
     }
 
     @Override
     public String off() {
+        state = "off";
         return "off";
+    }
+
+    @Override
+    public String getState() {
+        return state;
     }
 }

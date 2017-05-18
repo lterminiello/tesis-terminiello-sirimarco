@@ -15,4 +15,9 @@ public class ControllerOtherNodeMCU extends AbstractController {
         }
         return abstractController;
     }
+
+    @Override
+    public String getState() {
+        return "";
+    }
 }

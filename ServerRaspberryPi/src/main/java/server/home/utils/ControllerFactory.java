@@ -11,11 +11,11 @@ import server.home.model.TypeArtifact;
  */
 public class ControllerFactory {
 
-    public static AbstractController getController(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard) {
-        return idBoard.equals(Constants.RASPBERRY)?getControllerRasp(typeArtifact,pin,idBoard):getControllerNodeMCU(typeArtifact,pin,idBoard);
+    public static AbstractController getController(TypeArtifact typeArtifact, String idBoard) {
+        return idBoard.equals(Constants.RASPBERRY)?getControllerRasp(typeArtifact):getControllerNodeMCU(typeArtifact);
     }
 
-    private static AbstractController getControllerRasp(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){
+    private static AbstractController getControllerRasp(TypeArtifact typeArtifact){
         AbstractController abstractController = null;
         switch (typeArtifact) {
             case LIGHT:
@@ -37,7 +37,7 @@ public class ControllerFactory {
 
 
 
-    private static AbstractController getControllerNodeMCU(TypeArtifact typeArtifact, PinRaspberry pin, String idBoard){
+    private static AbstractController getControllerNodeMCU(TypeArtifact typeArtifact){
         AbstractController abstractController = null;
         switch (typeArtifact) {
             case LIGHT:

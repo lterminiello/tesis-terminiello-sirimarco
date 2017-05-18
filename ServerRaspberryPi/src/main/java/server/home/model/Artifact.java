@@ -19,6 +19,7 @@ public class Artifact {
     private String name;
     private PinRaspberry pin;
     private String idBoard;
+    private String stateArtifact;
     @JsonIgnore
     private AbstractController controller;
     @JsonIgnore
@@ -34,13 +35,14 @@ public class Artifact {
         this.pin = pin;
         this.idBoard = idBoard;
         this.typeArtifact = typeArtifact;
-        this.controller = ControllerFactory.getController(typeArtifact, pin, idBoard);
+        this.controller = ControllerFactory.getController(typeArtifact, idBoard);
+        this.stateArtifact = controller.getState();
         this.name = name;
     }
 
     public String runAction(@NotNull String action, @Nullable Integer pwd) {
         if (controller == null) {
-            this.controller = ControllerFactory.getController(typeArtifact, pin, idBoard);
+            this.controller = ControllerFactory.getController(typeArtifact, idBoard);
         }
         Method method;
         String response = null;
@@ -59,6 +61,7 @@ public class Artifact {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        stateArtifact = controller.getState();
         return response;
     }
 
@@ -116,6 +119,18 @@ public class Artifact {
 
     public void setIdBoard(String idBoard) {
         this.idBoard = idBoard;
+    }
+
+    public String getStateArtifact() {
+        if (controller == null) {
+            this.controller = ControllerFactory.getController(typeArtifact, idBoard);
+        }
+        stateArtifact = controller.getState();
+        return stateArtifact;
+    }
+
+    public void setStateArtifact(String stateArtifact) {
+        this.stateArtifact = stateArtifact;
     }
 
     @Override

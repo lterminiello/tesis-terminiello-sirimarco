@@ -15,4 +15,9 @@ public class ControllerLightNodeMCU extends AbstractController {
         }
         return abstractController;
     }
+
+    @Override
+    public String getState() {
+        return "";
+    }
 }

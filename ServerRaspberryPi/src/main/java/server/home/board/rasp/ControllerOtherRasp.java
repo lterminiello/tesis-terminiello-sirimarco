@@ -15,4 +15,9 @@ public class ControllerOtherRasp extends AbstractController {
         }
         return abstractController;
     }
+
+    @Override
+    public String getState() {
+        return "";
+    }
 }

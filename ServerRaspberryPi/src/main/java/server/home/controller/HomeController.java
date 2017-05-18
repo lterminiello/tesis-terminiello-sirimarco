@@ -26,9 +26,9 @@ public class HomeController {
 
     @RequestMapping(value = "/control", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> actionRoom(@RequestParam(value = "roomName", required = true) String roomName,
-                                             @RequestParam(value = "arctifactName", required = true) String arctifactName,
-                                             @RequestParam(value = "action", required = true) String action,
+    public ResponseEntity<String> actionRoom(@RequestParam(value = "roomName") String roomName,
+                                             @RequestParam(value = "arctifactName") String arctifactName,
+                                             @RequestParam(value = "action") String action,
                                              @RequestParam(value = "power", required = false) Integer power) {
         Artifact artifact = houseService.getHouse().getRoom(roomName).getArtifact(arctifactName);
         String response = artifact.runAction(action, power);
@@ -43,6 +43,12 @@ public class HomeController {
             houseService.setHouseScheme(scheme);
         }
         return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/roomState", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Room> roomState(@RequestParam(value = "name") String name) {
+        return new ResponseEntity<Room>((houseService.getHouse().getRoom(name)), HttpStatus.ACCEPTED);
     }
 
 

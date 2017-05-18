@@ -5,5 +5,7 @@ package server.home.board;
  */
 public abstract class AbstractController {
 
+    public abstract String getState();
+
 }
 

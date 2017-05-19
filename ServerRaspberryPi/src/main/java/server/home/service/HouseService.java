@@ -17,7 +17,6 @@ public class HouseService {
         this.jsonFactory = jsonFactory;
         this.houseJsonLoader = houseJsonLoader;
         this.house = houseJsonLoader.getSchemeHouse();
-
     }
 
     public House getHouse() {

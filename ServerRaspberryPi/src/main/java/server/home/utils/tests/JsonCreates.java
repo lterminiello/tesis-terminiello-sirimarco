@@ -1,8 +1,9 @@
-package server.home.utils;
+package server.home.utils.tests;
 
 import com.pi4j.io.gpio.RaspiPin;
 import server.home.json.JsonFactory;
 import server.home.model.*;
+import server.home.utils.HouseJsonLoader;
 
 import java.io.IOException;
 import java.net.*;
@@ -21,6 +22,8 @@ public class JsonCreates {
         room.setName("cucaaaa");
         house.addRoom(room);
         houseJsonLoader.setSchemeHouse(new JsonFactory().toJson(house));
+
+
     }
 
 

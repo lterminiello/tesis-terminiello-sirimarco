@@ -48,6 +48,9 @@
     <bean id="webConfig" class="server.home.WebConfig">
         <constructor-arg ref="jsonFactory"/>
     </bean>
+    <bean id="applicationContextProvder"
+          class="server.home.utils.ApplicationContextProvider"/>
+
     <context:annotation-config/>
 
 </beans>

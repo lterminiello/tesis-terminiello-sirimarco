@@ -1,5 +1,6 @@
 package server.home.controller;
 
+import org.quartz.JobExecutionException;
 import org.springframework.web.bind.annotation.*;
 import server.home.exeption.NotAllowedActionExeption;
 import server.home.model.*;
@@ -141,4 +142,18 @@ public class HomeController {
     }
 
 
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<House> test(@RequestParam(value = "scheme", required = false) String scheme) {
+        if (scheme != null) {
+            houseService.setHouseScheme(scheme);
+        }
+        CronJob cronJob = new CronJob("puta","puta","on",null);
+        try {
+            cronJob.execute(null);
+        } catch (JobExecutionException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);
+    }
 }

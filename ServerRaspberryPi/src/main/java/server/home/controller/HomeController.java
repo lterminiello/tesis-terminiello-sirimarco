@@ -142,7 +142,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+ /*   @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<House> test(@RequestParam(value = "scheme", required = false) String scheme) {
         if (scheme != null) {
@@ -155,5 +155,5 @@ public class HomeController {
             e.printStackTrace();
         }
         return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);
-    }
+    }*/
 }

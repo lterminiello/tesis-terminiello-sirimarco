@@ -21,6 +21,12 @@
         <constructor-arg ref="houseJsonLoader"/>
     </bean>
 
+    <bean id="cronService"
+          class="server.home.service.CronService">
+        <constructor-arg ref="jsonFactory"/>
+        <constructor-arg ref="houseJsonLoader"/>
+    </bean>
+
     <bean id="announcementService"
           class="server.home.service.AnnouncementService">
     </bean>
@@ -38,6 +44,11 @@
     <bean id="homeController"
           class="server.home.controller.HomeController">
         <constructor-arg ref="houseService"/>
+    </bean>
+
+    <bean id="sronController"
+          class="server.home.controller.CronController">
+        <constructor-arg ref="cronService"/>
     </bean>
 
     <bean id="announcementController"

@@ -3,13 +3,13 @@ package server.home.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import server.home.json.JsonFactory;
+import server.home.model.CronJob;
 import server.home.model.House;
 
 import java.io.*;
+import java.util.List;
 
-/**
- * Created by lterminiello on 11/10/16.
- */
+//TODO: cambiar nombre a a SchemeJsonLoader
 public class HouseJsonLoader {
 
 
@@ -22,6 +22,21 @@ public class HouseJsonLoader {
 
     public void setSchemeHouse(String json) {
         File archivo = new File(HouseJsonLoader.class.getResource("/HouseScheme.json").getPath());
+        persist(archivo,json);
+
+    }
+
+    public List<CronJob> getSchemeCronos(){
+        InputStream inputStream = HouseJsonLoader.class.getResourceAsStream("/CronosScheme.json");
+        return new JsonFactory().fromJson(new InputStreamReader(inputStream),new TypeReference<List<CronJob>>() {});
+    }
+
+    public void setSchemeCronos(String json) {
+        File archivo = new File(HouseJsonLoader.class.getResource("/CronosScheme.json").getPath());
+        persist(archivo,json);
+    }
+
+    private void persist(File archivo, String json){
         BufferedWriter bw;
         if (archivo.exists()) {
             try {

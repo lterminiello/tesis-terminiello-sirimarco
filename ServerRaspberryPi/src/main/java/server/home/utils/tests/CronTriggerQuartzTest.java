@@ -21,7 +21,7 @@ public class CronTriggerQuartzTest {
 		sch.scheduleJob(jobdetail, crontrigger);
 		sch.start();
 		Thread.sleep(100L * 1000L);
-		//sch.shutdown(true);
+		sch.shutdown(true);
 	}
 	private static ScheduleBuilder craeteSchedule(String cronExpression){
 		CronScheduleBuilder builder = CronScheduleBuilder.cronSchedule(cronExpression);

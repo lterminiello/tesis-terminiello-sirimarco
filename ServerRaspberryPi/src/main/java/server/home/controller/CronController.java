@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import server.home.model.Artifact;
 import server.home.model.CronJob;
+import server.home.model.CronManager;
 import server.home.service.CronService;
 
 
@@ -29,7 +30,7 @@ public class CronController {
 
     @RequestMapping(value = "/addCron", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> addCron(@RequestParam(value = "roomName") String roomName,
+    public ResponseEntity<String> deleteCron(@RequestParam(value = "roomName") String roomName,
                                              @RequestParam(value = "arctifactName") String arctifactName,
                                              @RequestParam(value = "action") String action,
                                              @RequestParam(value = "value", required = false) String value,
@@ -37,7 +38,28 @@ public class CronController {
                                           @RequestParam(value = "hour") String hour,
                                           @RequestParam(value = "days") String days) throws SchedulerException {
         CronJob cronJob = new CronJob(roomName,arctifactName,action,value,min,hour,days);
-        cronService.addCrono(cronJob);
+        cronService.deleteCrono(cronJob);
         return new ResponseEntity<String>(("no explote"), HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/deleteCron", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> addCron(@RequestParam(value = "roomName") String roomName,
+                                          @RequestParam(value = "arctifactName") String arctifactName,
+                                          @RequestParam(value = "action") String action,
+                                          @RequestParam(value = "value", required = false) String value,
+                                          @RequestParam(value = "min") String min,
+                                          @RequestParam(value = "hour") String hour,
+                                          @RequestParam(value = "days") String days) throws SchedulerException {
+        CronJob cronJob = new CronJob(roomName,arctifactName,action,value,min,hour,days);
+        cronService.deleteCrono(cronJob);
+        return new ResponseEntity<String>(("no explote"), HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/getCronos", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<CronManager> getCronos() {
+        CronManager cronManager = cronService.getCronJobs();
+        return new ResponseEntity<CronManager>((cronManager), HttpStatus.ACCEPTED);
     }
 }

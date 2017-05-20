@@ -1,19 +1,14 @@
 package server.home.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.python.antlr.ast.Str;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
+import server.home.service.CronService;
 import server.home.service.HouseService;
 import server.home.utils.ApplicationContextProvider;
 
-import java.util.List;
-
-/**
- * Created by default on 18/05/17.
- */
 public class CronJob implements Job {
 
     @JsonIgnore
@@ -30,6 +25,10 @@ public class CronJob implements Job {
     //TODO: Para indicar varios dias se separa con ,
     private String days;
 
+    public CronJob(){
+
+    }
+
     public CronJob(String roomName, String arctifactName, String action, String value, String min, String hour, String days) {
         this.roomName = roomName;
         this.arctifactName = arctifactName;
@@ -42,12 +41,9 @@ public class CronJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        HouseService houseService = ApplicationContextProvider.getApplicationContext().getBean("houseService",HouseService.class);
-        if (value != null){
-            houseService.getHouse().getRoom(roomName).getArtifact(arctifactName).runAction(action, Integer.valueOf(value));
-        }else {
-            houseService.getHouse().getRoom(roomName).getArtifact(arctifactName).runAction(action, null);
-        }
+        CronService cronService = ApplicationContextProvider.getApplicationContext().getBean("cronService",CronService.class);
+        cronService.executed(jobExecutionContext.getJobDetail().getKey());
+        System.out.println("me ejecute!!");
     }
 
     public String getRoomName() {
@@ -107,7 +103,7 @@ public class CronJob implements Job {
     }
 
     //TODO hacer esto mas prolijo
-    public String getCronoExpression(){
+    public String cronoExpression(){
         return "0" + " " + min + " " + hour + " " + "?" + " " + "*" + " " + days;
     }
 

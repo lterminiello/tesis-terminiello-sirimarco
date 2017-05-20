@@ -4,9 +4,11 @@ package server.home.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import server.home.json.JsonFactory;
 import server.home.model.CronJob;
+import server.home.model.CronManager;
 import server.home.model.House;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //TODO: cambiar nombre a a SchemeJsonLoader
@@ -26,9 +28,9 @@ public class HouseJsonLoader {
 
     }
 
-    public List<CronJob> getSchemeCronos(){
+    public CronManager getSchemeCronos(){
         InputStream inputStream = HouseJsonLoader.class.getResourceAsStream("/CronosScheme.json");
-        return new JsonFactory().fromJson(new InputStreamReader(inputStream),new TypeReference<List<CronJob>>() {});
+        return new JsonFactory().fromJson(new InputStreamReader(inputStream),new TypeReference<CronManager>() {});
     }
 
     public void setSchemeCronos(String json) {

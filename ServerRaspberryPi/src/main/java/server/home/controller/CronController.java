@@ -52,7 +52,7 @@ public class CronController {
                                           @RequestParam(value = "hour") String hour,
                                           @RequestParam(value = "days") String days) throws SchedulerException {
         CronJob cronJob = new CronJob(roomName,arctifactName,action,value,min,hour,days);
-        cronService.deleteCrono(cronJob);
+        cronService.addCrono(cronJob);
         return new ResponseEntity<String>(("no explote"), HttpStatus.ACCEPTED);
     }
 

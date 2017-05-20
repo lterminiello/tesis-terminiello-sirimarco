@@ -5,9 +5,6 @@ import server.home.exeption.UnknownArtifactExeption;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by default on 10/10/16.
- */
 public class Room {
 
     private List<Artifact> artifacts;
@@ -37,9 +34,9 @@ public class Room {
         this.name = name;
     }
 
-    public Artifact getArtifact(String name){
+    public Artifact getArtifact(String name) {
         Optional<Artifact> optional = this.artifacts.stream().filter(x -> x.getName().equals(name)).findFirst();
-        if (!optional.isPresent()){
+        if (!optional.isPresent()) {
             throw new UnknownArtifactExeption("El artefacto solicidato no existe");
         }
         return optional.get();
@@ -47,6 +44,6 @@ public class Room {
 
     @Override
     public boolean equals(Object obj) {
-        return this.name.equals(((Room)obj).getName());
+        return this.name.equals(((Room) obj).getName());
     }
 }

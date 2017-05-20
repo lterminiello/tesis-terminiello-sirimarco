@@ -1,15 +1,14 @@
 package server.home.board.rasp;
 
-import server.home.board.AbstractController;
 
-/**
- * Created by default on 08/10/16.
- */
-public class ControllerAirConditionerRasp extends AbstractController {
+import server.home.board.type.AbstractControllerInterface;
+import server.home.board.type.ControllerAirConditionerInterface;
 
-    private static AbstractController abstractController;
+public class ControllerAirConditionerRasp  implements ControllerAirConditionerInterface{
 
-    public static AbstractController getInstance() {
+    private static AbstractControllerInterface abstractController;
+
+    public static AbstractControllerInterface getInstance() {
         if (abstractController == null){
             abstractController = new ControllerAirConditionerRasp();
         }

@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import java.io.IOException;
 
 public class DateTimeSerializer
-    extends JsonSerializer<DateTime> {
+        extends JsonSerializer<DateTime> {
 
     @Override
     public void serialize(DateTime value, JsonGenerator jgen, SerializerProvider provider) throws IOException {

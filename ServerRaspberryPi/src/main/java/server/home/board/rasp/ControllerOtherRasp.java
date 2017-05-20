@@ -1,15 +1,14 @@
 package server.home.board.rasp;
 
-import server.home.board.AbstractController;
 
-/**
- * Created by default on 08/10/16.
- */
-public class ControllerOtherRasp extends AbstractController {
+import server.home.board.type.AbstractControllerInterface;
+import server.home.board.type.ControllerOtherInterface;
 
-    private static AbstractController abstractController;
+public class ControllerOtherRasp implements ControllerOtherInterface {
 
-    public static AbstractController getInstance() {
+    private static AbstractControllerInterface abstractController;
+
+    public static AbstractControllerInterface getInstance() {
         if (abstractController == null){
             abstractController = new ControllerOtherRasp();
         }

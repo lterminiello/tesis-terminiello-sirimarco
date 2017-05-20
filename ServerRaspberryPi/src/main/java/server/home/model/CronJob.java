@@ -6,7 +6,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import server.home.service.CronService;
-import server.home.service.HouseService;
 import server.home.utils.ApplicationContextProvider;
 
 public class CronJob implements Job {
@@ -25,7 +24,7 @@ public class CronJob implements Job {
     //TODO: Para indicar varios dias se separa con ,
     private String days;
 
-    public CronJob(){
+    public CronJob() {
 
     }
 
@@ -41,7 +40,7 @@ public class CronJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        CronService cronService = ApplicationContextProvider.getApplicationContext().getBean("cronService",CronService.class);
+        CronService cronService = ApplicationContextProvider.getApplicationContext().getBean("cronService", CronService.class);
         cronService.executed(jobExecutionContext.getJobDetail().getKey());
         System.out.println("me ejecute!!");
     }
@@ -103,7 +102,7 @@ public class CronJob implements Job {
     }
 
     //TODO hacer esto mas prolijo
-    public String cronoExpression(){
+    public String cronoExpression() {
         return "0" + " " + min + " " + hour + " " + "?" + " " + "*" + " " + days;
     }
 
@@ -117,10 +116,10 @@ public class CronJob implements Job {
 
     @Override
     public boolean equals(Object obj) {
-        return this.roomName.equals(((CronJob)obj).getRoomName())
-                && this.arctifactName.equals(((CronJob)obj).getArctifactName())
-                && this.hour.equals(((CronJob)obj).getHour())
-                && this.min.equals(((CronJob)obj).getMin())
-                && this.days.equals(((CronJob)obj).getDays());
+        return this.roomName.equals(((CronJob) obj).getRoomName())
+                && this.arctifactName.equals(((CronJob) obj).getArctifactName())
+                && this.hour.equals(((CronJob) obj).getHour())
+                && this.min.equals(((CronJob) obj).getMin())
+                && this.days.equals(((CronJob) obj).getDays());
     }
 }

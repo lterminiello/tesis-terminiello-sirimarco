@@ -4,14 +4,11 @@ import org.quartz.JobKey;
 
 import java.util.List;
 
-/**
- * Created by default on 19/05/17.
- */
 public class CronManager {
 
     private List<CronJob> jobs;
 
-    public CronManager(){
+    public CronManager() {
     }
 
     public CronManager(List<CronJob> jobs) {
@@ -26,21 +23,21 @@ public class CronManager {
         this.jobs = jobs;
     }
 
-    public void add(CronJob cronJob){
+    public void add(CronJob cronJob) {
         jobs.add(cronJob);
     }
 
-    public CronJob getEquals(CronJob cronJob){
+    public CronJob getEquals(CronJob cronJob) {
         return jobs.get(jobs.indexOf(cronJob));
     }
 
-    public void delete(CronJob cronJob){
+    public void delete(CronJob cronJob) {
         jobs.remove(cronJob);
     }
 
-    public CronJob getCronForJobKey(JobKey jobKey){
-        for (CronJob cronJob:jobs){
-            if (cronJob.getJobKey().equals(jobKey)){
+    public CronJob getCronForJobKey(JobKey jobKey) {
+        for (CronJob cronJob : jobs) {
+            if (cronJob.getJobKey().equals(jobKey)) {
                 return cronJob;
             }
         }

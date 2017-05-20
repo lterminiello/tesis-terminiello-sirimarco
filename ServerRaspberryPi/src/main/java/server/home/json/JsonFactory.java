@@ -14,47 +14,47 @@ import java.io.InputStreamReader;
 
 public class JsonFactory {
 
-	private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-	@SuppressWarnings("deprecation")
-	public JsonFactory() {
-		this.objectMapper = new ObjectMapper();
-		SimpleModule module = new SimpleModule("DefaultModule", new Version(0, 0, 1, null, null, null));
-		module.addSerializer(DateTime.class, new DateTimeSerializer());
+    @SuppressWarnings("deprecation")
+    public JsonFactory() {
+        this.objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule("DefaultModule", new Version(0, 0, 1, null, null, null));
+        module.addSerializer(DateTime.class, new DateTimeSerializer());
 
 
-		objectMapper.setPropertyNamingStrategy(
-			    PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		this.objectMapper.registerModule(module);
-	}
+        objectMapper.setPropertyNamingStrategy(
+                PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        this.objectMapper.registerModule(module);
+    }
 
-	public ObjectMapper getObjectMapper() {
-		return objectMapper;
-	}
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
 
-	public String toJson(Object object) {
-		try {
-			String jsonString = this.objectMapper.writeValueAsString(object);
-			return jsonString;
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException("Error creating a json", e);
-		}
-	}
+    public String toJson(Object object) {
+        try {
+            String jsonString = this.objectMapper.writeValueAsString(object);
+            return jsonString;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error creating a json", e);
+        }
+    }
 
-	public <T> T fromJson(String jsonReader, TypeReference<T> typeReference) {
-		try {
-			return this.objectMapper.readValue(jsonReader, typeReference);
-		} catch (IOException e) {
-			throw new RuntimeException("Error reading a json", e);
-		}
-	}
-	
-	public <T> T fromJson(InputStreamReader jsonReader, TypeReference<T> typeReference) {
-		try {
-			return this.objectMapper.readValue(jsonReader, typeReference);
-		} catch (IOException e) {
-			throw new RuntimeException("Error reading a json", e);
-		}
-	}
+    public <T> T fromJson(String jsonReader, TypeReference<T> typeReference) {
+        try {
+            return this.objectMapper.readValue(jsonReader, typeReference);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading a json", e);
+        }
+    }
+
+    public <T> T fromJson(InputStreamReader jsonReader, TypeReference<T> typeReference) {
+        try {
+            return this.objectMapper.readValue(jsonReader, typeReference);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading a json", e);
+        }
+    }
 }

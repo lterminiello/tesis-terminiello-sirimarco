@@ -5,27 +5,21 @@ import org.quartz.impl.StdSchedulerFactory;
 import server.home.json.JsonFactory;
 import server.home.model.CronJob;
 import server.home.model.CronManager;
-import server.home.utils.HouseJsonLoader;
-import server.home.utils.tests.MyJob;
+import server.home.utils.SchemeJsonLoader;
 
-import java.util.List;
-
-/**
- * Created by lterminiello on 19/05/17.
- */
 public class CronService {
 
     private JsonFactory jsonFactory;
-    private HouseJsonLoader houseJsonLoader;
+    private SchemeJsonLoader schemeJsonLoader;
     private CronManager cronJobs;
     private Scheduler sch;
     private HouseService houseService;
 
-    public CronService(JsonFactory jsonFactory, HouseJsonLoader houseJsonLoader,HouseService houseService) {
+    public CronService(JsonFactory jsonFactory, SchemeJsonLoader schemeJsonLoader, HouseService houseService) {
         this.jsonFactory = jsonFactory;
-        this.houseJsonLoader = houseJsonLoader;
+        this.schemeJsonLoader = schemeJsonLoader;
         this.houseService = houseService;
-        this.cronJobs = houseJsonLoader.getSchemeCronos();
+        this.cronJobs = schemeJsonLoader.getSchemeCronos();
         try {
             initCronos();
         } catch (SchedulerException e) {
@@ -62,7 +56,7 @@ public class CronService {
         sch.scheduleJob(jobdetail, crontrigger);
         cronJob.setJobKey(jobdetail.getKey());
         cronJobs.add(cronJob);
-        houseJsonLoader.setSchemeCronos(jsonFactory.toJson(cronJobs));
+        schemeJsonLoader.setSchemeCronos(jsonFactory.toJson(cronJobs));
     }
 
     public void deleteCrono(CronJob cronJob) throws SchedulerException {
@@ -73,10 +67,10 @@ public class CronService {
         CronJob cronoTodelete = cronJobs.getEquals(cronJob);
         sch.deleteJob(cronoTodelete.getJobKey());
         cronJobs.delete(cronoTodelete);
-        houseJsonLoader.setSchemeCronos(jsonFactory.toJson(cronJobs));
+        schemeJsonLoader.setSchemeCronos(jsonFactory.toJson(cronJobs));
     }
 
-    public CronManager getCronJobs(){
+    public CronManager getCronJobs() {
         return cronJobs;
     }
 
@@ -86,11 +80,11 @@ public class CronService {
         return builder;
     }
 
-    public void executed(JobKey jobKey){
+    public void executed(JobKey jobKey) {
         CronJob cronJob = cronJobs.getCronForJobKey(jobKey);
-        if (cronJob.getValue() != null){
+        if (cronJob.getValue() != null) {
             houseService.getHouse().getRoom(cronJob.getRoomName()).getArtifact(cronJob.getArctifactName()).runAction(cronJob.getAction(), Integer.valueOf(cronJob.getValue()));
-        }else {
+        } else {
             houseService.getHouse().getRoom(cronJob.getRoomName()).getArtifact(cronJob.getArctifactName()).runAction(cronJob.getAction(), null);
         }
     }

@@ -20,49 +20,49 @@ import java.util.List;
 @Component
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-	private JsonFactory jsonFactory;
+    private JsonFactory jsonFactory;
 
-	public WebConfig(JsonFactory jsonFactory) {
-		this.jsonFactory = jsonFactory;
-	}
+    public WebConfig(JsonFactory jsonFactory) {
+        this.jsonFactory = jsonFactory;
+    }
 
-	@SuppressWarnings("rawtypes")
-	@Override
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		super.configureMessageConverters(converters);
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.setObjectMapper(this.jsonFactory.getObjectMapper());
-		converters.add(converter);
-		converters.add(new HttpMessageConverter() {
+    @SuppressWarnings("rawtypes")
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        super.configureMessageConverters(converters);
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(this.jsonFactory.getObjectMapper());
+        converters.add(converter);
+        converters.add(new HttpMessageConverter() {
 
-			@Override
-			public boolean canRead(Class clazz, MediaType mediaType) {
-				return false;
-			}
+            @Override
+            public boolean canRead(Class clazz, MediaType mediaType) {
+                return false;
+            }
 
-			@Override
-			public boolean canWrite(Class clazz, MediaType mediaType) {
-				return true;
-			}
+            @Override
+            public boolean canWrite(Class clazz, MediaType mediaType) {
+                return true;
+            }
 
-			@Override
-			public List<MediaType> getSupportedMediaTypes() {
-				List<MediaType> list = new ArrayList<>();
-				list.add(MediaType.TEXT_PLAIN);
-				return list;
-			}
+            @Override
+            public List<MediaType> getSupportedMediaTypes() {
+                List<MediaType> list = new ArrayList<>();
+                list.add(MediaType.TEXT_PLAIN);
+                return list;
+            }
 
-			@Override
-			public Object read(Class clazz, HttpInputMessage inputMessage) throws IOException,
-					HttpMessageNotReadableException {
-				throw new UnsupportedOperationException();
-			}
+            @Override
+            public Object read(Class clazz, HttpInputMessage inputMessage) throws IOException,
+                    HttpMessageNotReadableException {
+                throw new UnsupportedOperationException();
+            }
 
-			@Override
-			public void write(Object t, MediaType contentType, HttpOutputMessage outputMessage) throws IOException,
-					HttpMessageNotWritableException {
-				outputMessage.getBody().write(t.toString().getBytes());
-			}
-		});
-	}
+            @Override
+            public void write(Object t, MediaType contentType, HttpOutputMessage outputMessage) throws IOException,
+                    HttpMessageNotWritableException {
+                outputMessage.getBody().write(t.toString().getBytes());
+            }
+        });
+    }
 }

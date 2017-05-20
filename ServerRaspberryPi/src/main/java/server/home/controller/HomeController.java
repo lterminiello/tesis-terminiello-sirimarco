@@ -1,11 +1,9 @@
 package server.home.controller;
 
-import org.quartz.JobExecutionException;
 import org.springframework.web.bind.annotation.*;
 import server.home.exeption.NotAllowedActionExeption;
 import server.home.model.*;
 import server.home.service.HouseService;
-import server.home.service.LightsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -50,6 +48,14 @@ public class HomeController {
     @ResponseBody
     public ResponseEntity<Room> roomState(@RequestParam(value = "name") String name) {
         return new ResponseEntity<Room>((houseService.getHouse().getRoom(name)), HttpStatus.ACCEPTED);
+    }
+
+    @ExceptionHandler(NotAllowedActionExeption.class)
+    public ResponseEntity<ErrorApi>
+    handleNotAllowedActionException(NotAllowedActionExeption ex) {
+        LOGGER.error(ex.getMessage(), ex);
+        return new ResponseEntity<ErrorApi>(new ErrorApi("400", ex.getMessage()),
+                HttpStatus.BAD_REQUEST);
     }
 
 
@@ -131,15 +137,6 @@ public class HomeController {
     // return new ResponseEntity<String>((s), HttpStatus.ACCEPTED);
     //
     // }
-
-
-    @ExceptionHandler(NotAllowedActionExeption.class)
-    public ResponseEntity<ErrorApi>
-    handleNotAllowedActionException(NotAllowedActionExeption ex) {
-        LOGGER.error(ex.getMessage(), ex);
-        return new ResponseEntity<ErrorApi>(new ErrorApi("400", ex.getMessage()),
-                HttpStatus.BAD_REQUEST);
-    }
 
 
  /*   @RequestMapping(value = "/test", method = RequestMethod.GET)

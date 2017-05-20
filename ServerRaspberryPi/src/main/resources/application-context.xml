@@ -12,19 +12,20 @@
     <bean id="jsonFactory"
           class="server.home.json.JsonFactory"/>
 
-    <bean id="houseJsonLoader"
-          class="server.home.utils.HouseJsonLoader"/>
+    <bean id="schemeJsonLoader"
+          class="server.home.utils.SchemeJsonLoader"/>
 
     <bean id="houseService"
           class="server.home.service.HouseService">
         <constructor-arg ref="jsonFactory"/>
-        <constructor-arg ref="houseJsonLoader"/>
+        <constructor-arg ref="schemeJsonLoader"/>
     </bean>
 
     <bean id="cronService"
           class="server.home.service.CronService">
         <constructor-arg ref="jsonFactory"/>
-        <constructor-arg ref="houseJsonLoader"/>
+        <constructor-arg ref="schemeJsonLoader"/>
+        <constructor-arg ref="houseService"/>
     </bean>
 
     <bean id="announcementService"

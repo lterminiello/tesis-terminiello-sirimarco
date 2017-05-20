@@ -2,21 +2,17 @@ package server.home.utils;
 
 import server.home.board.node.mcu.ControllerLightNodeMCU;
 import server.home.board.rasp.ControllerLightRasp;
-import server.home.board.AbstractController;
-import server.home.model.PinRaspberry;
+import server.home.board.type.AbstractControllerInterface;
 import server.home.model.TypeArtifact;
 
-/**
- * Created by default on 08/10/16.
- */
 public class ControllerFactory {
 
-    public static AbstractController getController(TypeArtifact typeArtifact, String idBoard) {
-        return idBoard.equals(Constants.RASPBERRY)?getControllerRasp(typeArtifact):getControllerNodeMCU(typeArtifact);
+    public static AbstractControllerInterface getController(TypeArtifact typeArtifact, String idBoard) {
+        return idBoard.equals(Constants.RASPBERRY) ? getControllerRasp(typeArtifact) : getControllerNodeMCU(typeArtifact);
     }
 
-    private static AbstractController getControllerRasp(TypeArtifact typeArtifact){
-        AbstractController abstractController = null;
+    private static AbstractControllerInterface getControllerRasp(TypeArtifact typeArtifact) {
+        AbstractControllerInterface abstractController = null;
         switch (typeArtifact) {
             case LIGHT:
                 abstractController = ControllerLightRasp.getInstance();
@@ -36,9 +32,8 @@ public class ControllerFactory {
     }
 
 
-
-    private static AbstractController getControllerNodeMCU(TypeArtifact typeArtifact){
-        AbstractController abstractController = null;
+    private static AbstractControllerInterface getControllerNodeMCU(TypeArtifact typeArtifact) {
+        AbstractControllerInterface abstractController = null;
         switch (typeArtifact) {
             case LIGHT:
                 abstractController = ControllerLightNodeMCU.getInstance();

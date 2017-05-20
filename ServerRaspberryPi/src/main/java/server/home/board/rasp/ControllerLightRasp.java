@@ -1,17 +1,14 @@
 package server.home.board.rasp;
 
-import server.home.board.AbstractController;
+import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerLightInterface;
 
-/**
- * Created by default on 08/10/16.
- */
-public class ControllerLightRasp extends AbstractController implements ControllerLightInterface{
+public class ControllerLightRasp implements ControllerLightInterface{
 
-    private static AbstractController abstractController;
+    private static AbstractControllerInterface abstractController;
     private String state ="off";
 
-    public static AbstractController getInstance() {
+    public static AbstractControllerInterface getInstance() {
         if (abstractController == null){
             abstractController = new ControllerLightRasp();
         }

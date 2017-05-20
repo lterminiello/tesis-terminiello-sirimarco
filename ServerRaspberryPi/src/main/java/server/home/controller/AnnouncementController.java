@@ -29,12 +29,12 @@ public class AnnouncementController {
     @RequestMapping(value = "/device", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> announcementDevice(@RequestParam(value = "id", required = true) String id,
-                                             @RequestParam(value = "ip", required = true) String ip,
-                                             @RequestParam(value = "code", required = true) String code) {
+                                                     @RequestParam(value = "ip", required = true) String ip,
+                                                     @RequestParam(value = "code", required = true) String code) {
         if (code.equals(Constants.ANNOUNCEMENT_CODE_APP)) {
-            announcementService.addDevice(id,ip);
+            announcementService.addDevice(id, ip);
             return new ResponseEntity<String>(("Vinculado"), HttpStatus.ACCEPTED);
-        }else {
+        } else {
             return new ResponseEntity<String>(("Error de autentificacion"), HttpStatus.FORBIDDEN);
         }
     }
@@ -42,12 +42,12 @@ public class AnnouncementController {
     @RequestMapping(value = "/board", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> announcementBoard(@RequestParam(value = "id", required = true) String id,
-                                                     @RequestParam(value = "ip", required = true) String ip,
-                                                     @RequestParam(value = "code", required = true) String code) {
+                                                    @RequestParam(value = "ip", required = true) String ip,
+                                                    @RequestParam(value = "code", required = true) String code) {
         if (code.equals(Constants.ANNOUNCEMENT_CODE_BOARD)) {
-            announcementService.addBoard(id,ip);
+            announcementService.addBoard(id, ip);
             return new ResponseEntity<String>(("Vinculado"), HttpStatus.ACCEPTED);
-        }else {
+        } else {
             return new ResponseEntity<String>(("Error de autentificacion"), HttpStatus.FORBIDDEN);
         }
     }

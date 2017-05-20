@@ -1,15 +1,14 @@
 package server.home.board.node.mcu;
 
-import server.home.board.AbstractController;
 
-/**
- * Created by default on 08/10/16.
- */
-public class ControllerLightNodeMCU extends AbstractController {
+import server.home.board.type.AbstractControllerInterface;
+import server.home.board.type.ControllerLightInterface;
 
-    private static AbstractController abstractController;
+public class ControllerLightNodeMCU implements ControllerLightInterface {
 
-    public static AbstractController getInstance() {
+    private static AbstractControllerInterface abstractController;
+
+    public static AbstractControllerInterface getInstance() {
         if (abstractController == null){
             abstractController = new ControllerLightNodeMCU();
         }
@@ -19,5 +18,15 @@ public class ControllerLightNodeMCU extends AbstractController {
     @Override
     public String getState() {
         return "";
+    }
+
+    @Override
+    public String on() {
+        return null;
+    }
+
+    @Override
+    public String off() {
+        return null;
     }
 }

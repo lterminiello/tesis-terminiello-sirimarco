@@ -1,15 +1,13 @@
 package server.home.board.rasp;
 
-import server.home.board.AbstractController;
+import server.home.board.type.AbstractControllerInterface;
+import server.home.board.type.ControllerBlindInterface;
 
-/**
- * Created by default on 08/10/16.
- */
-public class ControllerBlindRasp extends AbstractController {
+public class ControllerBlindRasp implements ControllerBlindInterface {
 
-    private static AbstractController abstractController;
+    private static AbstractControllerInterface abstractController;
 
-    public static AbstractController getInstance() {
+    public static AbstractControllerInterface getInstance() {
         if (abstractController == null){
             abstractController = new ControllerBlindRasp();
         }

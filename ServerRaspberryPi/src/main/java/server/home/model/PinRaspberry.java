@@ -1,8 +1,5 @@
 package server.home.model;
 
-/**
- * Created by lterminiello on 12/10/16.
- */
 public enum PinRaspberry {
     GPIO_1(1,"GPIO 1"),
     GPIO_2(2,"GPIO 2"),

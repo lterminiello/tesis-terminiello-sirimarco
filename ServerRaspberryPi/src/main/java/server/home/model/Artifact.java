@@ -3,16 +3,13 @@ package server.home.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
-import server.home.board.AbstractController;
+import server.home.board.type.AbstractControllerInterface;
 import server.home.exeption.NotAllowedActionExeption;
 import server.home.utils.ControllerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
- * Created by default on 08/10/16.
- */
 public class Artifact {
 
     private TypeArtifact typeArtifact;
@@ -21,7 +18,7 @@ public class Artifact {
     private String idBoard;
     private String stateArtifact;
     @JsonIgnore
-    private AbstractController controller;
+    private AbstractControllerInterface controller;
     @JsonIgnore
     private Class paramPower[] = {Integer.TYPE};
     @JsonIgnore
@@ -73,11 +70,11 @@ public class Artifact {
         this.typeArtifact = typeArtifact;
     }
 
-    public AbstractController getController() {
+    public AbstractControllerInterface getController() {
         return controller;
     }
 
-    public void setController(AbstractController controller) {
+    public void setController(AbstractControllerInterface controller) {
         this.controller = controller;
     }
 

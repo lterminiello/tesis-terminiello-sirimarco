@@ -12,21 +12,21 @@ import java.io.InputStreamReader;
 
 public class HttpClientService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientService.class);
 
-	public InputStreamReader getResponceFromGet(String url) {
+    public InputStreamReader getResponceFromGet(String url) {
         HttpClient clientHttp = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet(url);
-		try {
-			HttpResponse response = clientHttp.execute(request);
-			LOGGER.debug("Status Code : " + response.getStatusLine().getStatusCode() + "URL: " + url );
-			if (response.getStatusLine().getStatusCode() != 400) {
-				return new InputStreamReader(response.getEntity().getContent());
-			} else {
-				throw new RuntimeException("El recurso no existe");
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+        HttpGet request = new HttpGet(url);
+        try {
+            HttpResponse response = clientHttp.execute(request);
+            LOGGER.debug("Status Code : " + response.getStatusLine().getStatusCode() + "URL: " + url);
+            if (response.getStatusLine().getStatusCode() != 400) {
+                return new InputStreamReader(response.getEntity().getContent());
+            } else {
+                throw new RuntimeException("El recurso no existe");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

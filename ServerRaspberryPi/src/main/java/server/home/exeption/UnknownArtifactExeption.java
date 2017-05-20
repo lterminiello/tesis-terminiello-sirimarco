@@ -1,8 +1,5 @@
 package server.home.exeption;
 
-/**
- * Created by lterminiello on 12/10/16.
- */
 public class UnknownArtifactExeption extends RuntimeException {
     public UnknownArtifactExeption() {
     }

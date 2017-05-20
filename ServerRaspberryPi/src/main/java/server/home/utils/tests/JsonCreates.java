@@ -3,7 +3,7 @@ package server.home.utils.tests;
 import com.pi4j.io.gpio.RaspiPin;
 import server.home.json.JsonFactory;
 import server.home.model.*;
-import server.home.utils.HouseJsonLoader;
+import server.home.utils.SchemeJsonLoader;
 
 import java.io.IOException;
 import java.net.*;
@@ -16,12 +16,12 @@ import java.util.Enumeration;
 public class JsonCreates {
 
     public static void main(String[] args) throws IOException {
-        HouseJsonLoader houseJsonLoader = new HouseJsonLoader();
-        House house = houseJsonLoader.getSchemeHouse();
+        SchemeJsonLoader schemeJsonLoader = new SchemeJsonLoader();
+        House house = schemeJsonLoader.getSchemeHouse();
         Room room = house.getRooms().get(0);
         room.setName("cucaaaa");
         house.addRoom(room);
-        houseJsonLoader.setSchemeHouse(new JsonFactory().toJson(house));
+        schemeJsonLoader.setSchemeHouse(new JsonFactory().toJson(house));
 
 
     }

@@ -16,7 +16,7 @@ public class HttpClientService {
 
     public InputStreamReader getResponceFromGet(String url) {
         HttpClient clientHttp = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet(url);
+        HttpGet request = new HttpGet("http://"+url);
         try {
             HttpResponse response = clientHttp.execute(request);
             LOGGER.debug("Status Code : " + response.getStatusLine().getStatusCode() + "URL: " + url);

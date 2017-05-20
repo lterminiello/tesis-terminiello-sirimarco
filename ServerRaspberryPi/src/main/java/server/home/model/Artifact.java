@@ -20,9 +20,9 @@ public class Artifact {
     @JsonIgnore
     private AbstractControllerInterface controller;
     @JsonIgnore
-    private Class paramPower[] = {Integer.TYPE};
+    private Class paramPower[] = {Artifact.class,Integer.TYPE};
     @JsonIgnore
-    private Class noParam[] = {};
+    private Class noParam[] = {Artifact.class};
 
     public Artifact() {
     }
@@ -46,10 +46,10 @@ public class Artifact {
         try {
             if (pwd == null) {
                 method = controller.getClass().getDeclaredMethod(action, noParam);
-                response = (String) method.invoke(controller);
+                response = (String) method.invoke(controller,this);
             } else {
                 method = controller.getClass().getDeclaredMethod(action, paramPower);
-                response = (String) method.invoke(controller, pwd);
+                response = (String) method.invoke(controller,this, pwd);
             }
         } catch (NoSuchMethodException e) {
             throw new NotAllowedActionExeption("La accion solicitada no esta disponible para este artefacto");

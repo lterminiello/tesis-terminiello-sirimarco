@@ -4,7 +4,7 @@ package server.home.board.node.mcu;
 import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerAirConditionerInterface;
 
-public class ControllerAirConditionerNodeMCU implements ControllerAirConditionerInterface{
+public class ControllerAirConditionerNodeMCU extends AbstracControlerNodeMcu implements ControllerAirConditionerInterface{
 
     private static AbstractControllerInterface abstractController;
 

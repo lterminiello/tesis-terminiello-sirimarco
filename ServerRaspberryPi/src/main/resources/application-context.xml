@@ -32,6 +32,10 @@
           class="server.home.service.AnnouncementService">
     </bean>
 
+    <bean id="httpClientService"
+          class="server.home.service.HttpClientService">
+    </bean>
+
     <bean id="boardService"
           class="server.home.service.BoardService">
         <constructor-arg ref="announcementService"/>
@@ -47,7 +51,7 @@
         <constructor-arg ref="houseService"/>
     </bean>
 
-    <bean id="sronController"
+    <bean id="cronController"
           class="server.home.controller.CronController">
         <constructor-arg ref="cronService"/>
     </bean>

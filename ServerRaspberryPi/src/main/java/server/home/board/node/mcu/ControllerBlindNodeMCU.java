@@ -3,7 +3,7 @@ package server.home.board.node.mcu;
 import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerBlindInterface;
 
-public class ControllerBlindNodeMCU implements ControllerBlindInterface {
+public class ControllerBlindNodeMCU extends AbstracControlerNodeMcu implements ControllerBlindInterface {
 
     private static AbstractControllerInterface abstractController;
 

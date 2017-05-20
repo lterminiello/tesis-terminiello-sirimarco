@@ -2,6 +2,7 @@ package server.home.board.rasp;
 
 import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerLightInterface;
+import server.home.model.Artifact;
 
 public class ControllerLightRasp implements ControllerLightInterface{
 
@@ -16,13 +17,13 @@ public class ControllerLightRasp implements ControllerLightInterface{
     }
 
     @Override
-    public String on() {
+    public String on(Artifact artifact) {
         state = "on";
         return "on";
     }
 
     @Override
-    public String off() {
+    public String off(Artifact artifact) {
         state = "off";
         return "off";
     }

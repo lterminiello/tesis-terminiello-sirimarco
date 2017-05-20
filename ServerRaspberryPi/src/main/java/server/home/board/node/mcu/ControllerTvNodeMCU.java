@@ -4,7 +4,7 @@ package server.home.board.node.mcu;
 import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerTvInterface;
 
-public class ControllerTvNodeMCU implements ControllerTvInterface {
+public class ControllerTvNodeMCU extends AbstracControlerNodeMcu implements ControllerTvInterface {
 
     private static AbstractControllerInterface abstractController;
 

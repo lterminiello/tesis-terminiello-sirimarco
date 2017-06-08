@@ -3,7 +3,7 @@ package server.home.board.node.mcu;
 import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerDimmerInterface;
 
-public class ControllerDimmerNodeMCU extends AbstracControlerNodeMcu implements ControllerDimmerInterface {
+public class ControllerDimmerNodeMCU extends AbstractControllerNodeMcu implements ControllerDimmerInterface {
 
     private static AbstractControllerInterface abstractController;
 

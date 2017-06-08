@@ -4,7 +4,7 @@ import server.home.model.Artifact;
 import server.home.service.AnnouncementService;
 import server.home.utils.ApplicationContextProvider;
 
-public class AbstracControlerNodeMcu {
+public class AbstractControllerNodeMcu {
 
 
     private static final String PORT = "3048";

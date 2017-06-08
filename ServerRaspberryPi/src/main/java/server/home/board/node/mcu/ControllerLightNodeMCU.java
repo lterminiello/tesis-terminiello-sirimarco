@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-public class ControllerLightNodeMCU extends AbstracControlerNodeMcu implements ControllerLightInterface {
+public class ControllerLightNodeMCU extends AbstractControllerNodeMcu implements ControllerLightInterface {
 
     private static AbstractControllerInterface abstractController;
 

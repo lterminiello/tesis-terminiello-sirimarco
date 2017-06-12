@@ -25,8 +25,9 @@ public class ServerController {
 
     @RequestMapping(value = "/addNetwork", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> getIdBoards(@RequestParam(value = "ssid", required = true) String ssid,
+    public ResponseEntity<String> addNetwork(@RequestParam(value = "ssid", required = true) String ssid,
                                               @RequestParam(value = "psk", required = true) String psk) {
         return new ResponseEntity<String>(serverService.addNetwork(ssid, psk), HttpStatus.ACCEPTED);
     }
+
 }

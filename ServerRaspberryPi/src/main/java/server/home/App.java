@@ -8,6 +8,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.DispatcherServlet;
+import server.home.service.ServerService;
+import server.home.utils.ApplicationContextProvider;
 
 import static org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS;
 
@@ -31,6 +33,8 @@ public class App {
 
 		try {
 			server.start();
+			ServerService serverService = ApplicationContextProvider.getApplicationContext().getBean("serverService", ServerService.class);
+			serverService.serverStatus();
 			server.join();
 		} catch (Exception exception) {
 			LOGGER.error("Error starting the application", exception);

@@ -41,6 +41,15 @@
         <constructor-arg ref="announcementService"/>
     </bean>
 
+    <bean id="serverService"
+          class="server.home.service.ServerService">
+    </bean>
+
+    <bean id="serverController"
+          class="server.home.controller.ServerController">
+        <constructor-arg ref="serverService"/>
+    </bean>
+
     <bean id="boardController"
           class="server.home.controller.BoardController">
         <constructor-arg ref="boardService"/>

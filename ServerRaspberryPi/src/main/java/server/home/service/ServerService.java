@@ -42,29 +42,24 @@ public class ServerService {
         return output.toString();
     }
 
-    //FIXME ver esto porque no anda, es un detalle del led nomas
     private boolean isConnectedInternet(){
-        return isReachableByTcp("www.google.com",8080,5000);
+        return isReachableByTcp("www.google.com",80,5000);
     }
 
     public void serverStatus(){
+        LOGGER.info("Check Connection");
+        GpioController gpio = GpioFactory.getInstance();
+        GpioPinDigitalOutput pinOk = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "status", PinState.HIGH);
+        GpioPinDigitalOutput pinDown = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "status", PinState.HIGH);
         if (isConnectedInternet()){
-            serverUp();
+            pinOk.high();
+            pinDown.low();
+            LOGGER.info("Connection its ok");
         } else {
-            serverLow();
+            pinOk.low();
+            pinDown.high();
+            LOGGER.info("Not internet connect");
         }
-    }
-
-    private void serverUp(){
-        GpioController gpio = GpioFactory.getInstance();
-        GpioPinDigitalOutput pinStatusServer = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "status", PinState.HIGH);
-        pinStatusServer.high();
-    }
-
-    private void serverLow(){
-        GpioController gpio = GpioFactory.getInstance();
-        GpioPinDigitalOutput pinStatusServer = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "status", PinState.HIGH);
-        pinStatusServer.high();
     }
 
     private static boolean isReachableByTcp(String host, int port, int timeout) {

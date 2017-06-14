@@ -16,12 +16,14 @@ import java.util.Enumeration;
 public class JsonCreates {
 
     public static void main(String[] args) throws IOException {
-        SchemeJsonLoader schemeJsonLoader = new SchemeJsonLoader();
+       /* SchemeJsonLoader schemeJsonLoader = new SchemeJsonLoader();
         House house = schemeJsonLoader.getSchemeHouse();
         Room room = house.getRooms().get(0);
         room.setName("cucaaaa");
         house.addRoom(room);
-        schemeJsonLoader.setSchemeHouse(new JsonFactory().toJson(house));
+        schemeJsonLoader.setSchemeHouse(new JsonFactory().toJson(house));*/
+
+        System.out.println(isReachableByTcp("www.google.com",80,5000));
 
 
     }

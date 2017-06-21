@@ -6,7 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-public class ServerUtils {
+public class ConnectionUtils {
 
     public static String findServerOpen(String ipRed, String ipBroadcast) {
         String ip;

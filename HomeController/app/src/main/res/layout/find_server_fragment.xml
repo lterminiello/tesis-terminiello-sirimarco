@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.skyfishjy.library.RippleBackground
+        android:id="@+id/animationRipple"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:rb_color="@color/colorPrimary"
+        app:rb_duration="3500"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="6"
+        app:rb_scale="6">
+
+        <ImageView
+            android:id="@+id/centerImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_devices" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscando el servidor"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp"
+            android:textSize="23sp"
+            android:textColor="@color/secondarytext"
+            android:fontFamily="sans-serif"/>
+    </com.skyfishjy.library.RippleBackground>
 
     <TextView
         android:id="@+id/myIp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="holaaaa"/>
-    <TextView
-        android:id="@+id/myIpMask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="holaaaa"/>
+        android:text="holaaaa" />
 </LinearLayout>

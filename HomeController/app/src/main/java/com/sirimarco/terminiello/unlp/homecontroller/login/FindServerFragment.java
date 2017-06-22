@@ -11,6 +11,7 @@ import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
     private String ipMask;
     private ObtainIpServerTask obtainIpServerTask;
     private IpDeviceInfo ipDeviceInfo;
+    private Button btnRetry;
+    private TextView txtInfo;
 
 
     @Nullable
@@ -42,6 +45,9 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
         View view = inflater.inflate(R.layout.find_server_fragment, container, false);
         txtIp = view.findViewById(R.id.myIp);
         rippleBackground = view.findViewById(R.id.animationRipple);
+        btnRetry = view.findViewById(R.id.btnRetry);
+        txtInfo = view.findViewById(R.id.txtInfo);
+
         wm = (WifiManager) getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         ip = Formatter.formatIpAddress(wm.getDhcpInfo().ipAddress);
         ipRed = Formatter.formatIpAddress(wm.getDhcpInfo().ipAddress & wm.getDhcpInfo().netmask);
@@ -52,12 +58,20 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
 
         rippleBackground.startRippleAnimation();
 
+        btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tryConnectToServer();
+                btnRetry.setVisibility(View.GONE);
+            }
+        });
+
         tryConnectToServer();
 
         return view;
     }
 
-    private void tryConnectToServer(){
+    private void tryConnectToServer() {
         if (!wm.isWifiEnabled()) {
             wm.setWifiEnabled(true);
             ThradUtils.executedRunnable(new Runnable() {
@@ -72,7 +86,8 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
                         if (!ip.equals("0.0.0.0")) {
                             obtainIpServerTask.execute(ipDeviceInfo);
                         } else {
-                            Toast.makeText(getContext(), "No hay conexion a internet bonton reitentar", Toast.LENGTH_SHORT).show();
+                            btnRetry.setVisibility(View.VISIBLE);
+                            txtInfo.setText(R.string.noWifiConnect);
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -85,16 +100,16 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
         }
     }
 
-    private void connectWiFiServer(){
+    private void connectWiFiServer() {
         String networkSSID = "RPi_SERVER";
         String networkPass = "ladesiempre";
         WifiConfiguration conf = new WifiConfiguration();
         conf.SSID = "\"" + networkSSID + "\"";
-        conf.preSharedKey = "\""+ networkPass +"\"";
+        conf.preSharedKey = "\"" + networkPass + "\"";
         wm.addNetwork(conf);
         List<WifiConfiguration> list = wm.getConfiguredNetworks();
-        for( WifiConfiguration i : list ) {
-            if(i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
+        for (WifiConfiguration i : list) {
+            if (i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
                 wm.disconnect();
                 wm.enableNetwork(i.networkId, true);
                 wm.reconnect();
@@ -113,8 +128,9 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
                     txtIp.setText(info);
                     rippleBackground.stopRippleAnimation();
                     rippleBackground.setVisibility(View.GONE);
-                }else{
+                } else {
                     //TODO DIALOGO EXPLICANDO acepta y hace la conexion forzada
+                    txtInfo.setText(R.string.noFindServer);
                     connectWiFiServer();
                 }
             }

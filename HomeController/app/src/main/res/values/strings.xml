@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Home Controller</string>
+    <string name="searchServer">Buscando el servidor.</string>
+    <string name="noWifiConnect">No se detecto ninguna Wifi, conéctese y vuelva a intentar.</string>
+    <string name="noFindServer">No se encontro ningun servidor</string>
+    <string name="retry">Reintentar</string>
+
 </resources>

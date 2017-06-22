@@ -24,20 +24,34 @@
             android:src="@drawable/icon_devices" />
 
         <TextView
+            android:id="@+id/txtInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buscando el servidor"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="64dp"
-            android:textSize="23sp"
+            android:fontFamily="sans-serif"
+            android:text="@string/searchServer"
             android:textColor="@color/secondarytext"
-            android:fontFamily="sans-serif"/>
+            android:textSize="23sp" />
+
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/txtInfo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:text="@string/retry"
+            android:visibility="gone"/>
+
     </com.skyfishjy.library.RippleBackground>
+
 
     <TextView
         android:id="@+id/myIp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="holaaaa" />
+
 </LinearLayout>

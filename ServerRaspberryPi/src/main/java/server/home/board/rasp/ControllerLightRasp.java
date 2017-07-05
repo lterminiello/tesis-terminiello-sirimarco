@@ -17,15 +17,13 @@ public class ControllerLightRasp implements ControllerLightInterface{
     }
 
     @Override
-    public String on(Artifact artifact) {
+    public void on(Artifact artifact) {
         state = "on";
-        return "on";
     }
 
     @Override
-    public String off(Artifact artifact) {
+    public void off(Artifact artifact) {
         state = "off";
-        return "off";
     }
 
     @Override

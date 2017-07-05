@@ -14,9 +14,9 @@ public class AbstractControllerNodeMcu {
         String ip = announcementService.getIpBoard(artifact.getIdBoard());
         int pin = artifact.getPin().getNumberPin();
         if (value != null){
-            return ip+":"+PORT+"/"+artifact.getIdBoard()+"/"+pin+"/"+action+"?"+"value="+value;
+            return ip+":"+PORT+"/"+artifact.getIdBoard()+"/"+pin+"/"+action+"/"+value;
         }else{
-            return ip+":"+PORT+"/"+artifact.getIdBoard()+"/"+pin+"/"+action;
+            return ip+":"+PORT+"/"+artifact.getIdBoard()+"/"+pin+"/"+action+"/0";
         }
     }
 }

@@ -2,6 +2,7 @@ package server.home.board.rasp;
 
 import server.home.board.type.AbstractControllerInterface;
 import server.home.board.type.ControllerDimmerInterface;
+import server.home.model.Artifact;
 
 public class ControllerDimmerRasp implements ControllerDimmerInterface {
 
@@ -17,5 +18,15 @@ public class ControllerDimmerRasp implements ControllerDimmerInterface {
     @Override
     public String getState() {
         return "";
+    }
+
+    @Override
+    public void on(Artifact artifact, Integer pwd) {
+
+    }
+
+    @Override
+    public void off(Artifact artifact) {
+
     }
 }

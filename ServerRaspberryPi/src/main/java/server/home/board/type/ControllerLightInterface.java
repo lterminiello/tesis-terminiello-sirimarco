@@ -4,6 +4,6 @@ import server.home.model.Artifact;
 
 public interface ControllerLightInterface extends AbstractControllerInterface {
 
-    public String on(Artifact artifact);
-    public String off(Artifact artifact);
+    void on(Artifact artifact);
+    void off(Artifact artifact);
 }

@@ -42,14 +42,15 @@ public class Artifact {
             this.controller = ControllerFactory.getController(typeArtifact, idBoard);
         }
         Method method;
-        String response = null;
+        String response = this.getName()+ " - " + action + "in idBoard:"+ this.idBoard;
         try {
             if (pwd == null) {
                 method = controller.getClass().getDeclaredMethod(action, noParam);
-                response = (String) method.invoke(controller,this);
+                method.invoke(controller,this);
+                response = this.getName()+ " - " + action + " - " + pwd + " in idBoard:"+ this.idBoard;
             } else {
                 method = controller.getClass().getDeclaredMethod(action, paramPower);
-                response = (String) method.invoke(controller,this, pwd);
+                method.invoke(controller,this, pwd);
             }
         } catch (NoSuchMethodException e) {
             throw new NotAllowedActionExeption("La accion solicitada no esta disponible para este artefacto");

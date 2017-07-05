@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class ControllerLightNodeMCU extends AbstractControllerNodeMcu implements ControllerLightInterface {
 
     private static AbstractControllerInterface abstractController;
+    private String state;
 
     public static AbstractControllerInterface getInstance() {
         if (abstractController == null){
@@ -24,20 +25,22 @@ public class ControllerLightNodeMCU extends AbstractControllerNodeMcu implements
 
     @Override
     public String getState() {
-        return "";
+        return state;
     }
 
 
+    //TODO Thread.currentThread().getStackTrace()[1].getMethodName() ver de usar este metodo
     @Override
-    public String on(Artifact artifact) {
+    public void on(Artifact artifact) {
         HttpClientService httpClientService = ApplicationContextProvider.getApplicationContext().getBean("httpClientService", HttpClientService.class);
-        InputStreamReader inputStreamReader = httpClientService.getResponceFromGet(getUrlWithArtifact(artifact, "on",null));
-        return new BufferedReader(inputStreamReader)
-                .lines().collect(Collectors.joining("\n"));
+        httpClientService.getResponceFromGet(getUrlWithArtifact(artifact, "on",null));
+        state = "on";
     }
 
     @Override
-    public String off(Artifact artifact) {
-        return null;
+    public void off(Artifact artifact) {
+        HttpClientService httpClientService = ApplicationContextProvider.getApplicationContext().getBean("httpClientService", HttpClientService.class);
+        httpClientService.getResponceFromGet(getUrlWithArtifact(artifact, "off",null));
+        state = "off";
     }
 }

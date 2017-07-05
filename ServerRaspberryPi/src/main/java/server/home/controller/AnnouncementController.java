@@ -33,6 +33,7 @@ public class AnnouncementController {
                                                      @RequestParam(value = "code", required = true) String code) {
         if (code.equals(Constants.ANNOUNCEMENT_CODE_APP)) {
             announcementService.addDevice(id, ip);
+            System.out.println("hola");
             return new ResponseEntity<String>(("Vinculado"), HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<String>(("Error de autentificacion"), HttpStatus.FORBIDDEN);
@@ -46,6 +47,7 @@ public class AnnouncementController {
                                                     @RequestParam(value = "code", required = true) String code) {
         if (code.equals(Constants.ANNOUNCEMENT_CODE_BOARD)) {
             announcementService.addBoard(id, ip);
+            LOGGER.info(ip);
             return new ResponseEntity<String>(("Vinculado"), HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<String>(("Error de autentificacion"), HttpStatus.FORBIDDEN);

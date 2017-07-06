@@ -14,7 +14,7 @@ public class ConnectionUtils {
         long broadcastIp = ipToLong(ipBroadcast);
         while (baseIp!= broadcastIp){
             ip = longToIp(baseIp);
-            if (isReachableByTcp(ip, 3047, 100)) {
+            if (isReachableByTcp(ip, 3047, 500)) {
                 return ip;
             }
             baseIp++;

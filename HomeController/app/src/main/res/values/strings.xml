@@ -2,7 +2,12 @@
     <string name="app_name">Home Controller</string>
     <string name="searchServer">Buscando el servidor.</string>
     <string name="noWifiConnect">No se detecto ninguna Wifi, conéctese y vuelva a intentar.</string>
-    <string name="noFindServer">No se encontro ningun servidor</string>
+    <string name="noFindServer">No se encontro ningun servidor.</string>
     <string name="retry">Reintentar</string>
+    <string name="connectToServerWifi">Conectando a la wifi del servidor.</string>
+    <string name="noFindServerWifi">El servidor se encuentra apagado.</string>
+    <string name="noServerInNetwork">No se encontro servidor activo</string>
+    <string name="noServerInNetworkDescription">No hemos encontrado un servidor activo en su red. Si es la primera vez que enciende el servidor, precione aceptar para empezar el proceso de configuracion. Sino reintente la busqueda.</string>
+    <string name="accept">Aceptar</string>
 
 </resources>

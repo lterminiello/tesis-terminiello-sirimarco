@@ -4,7 +4,6 @@ package server.home.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import server.home.controller.HomeController;
 import server.home.json.JsonFactory;
 import server.home.model.CronManager;
 import server.home.model.House;

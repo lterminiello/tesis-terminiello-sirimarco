@@ -32,7 +32,7 @@ public class HomeController {
         Artifact artifact = houseService.getHouse().getRoom(roomName).getArtifact(arctifactName);
         String response = artifact.runAction(action, power);
         LOGGER.info(response.toString());
-        return new ResponseEntity<String>((response), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>((response), HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/houseScheme", method = RequestMethod.GET)
@@ -41,20 +41,21 @@ public class HomeController {
         if (scheme != null) {
             houseService.setHouseScheme(scheme);
         }
-        return new ResponseEntity<House>((houseService.getHouse()), HttpStatus.ACCEPTED);
+        LOGGER.info("request house scheme");
+        return new ResponseEntity<>((houseService.getHouse()), HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/roomState", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Room> roomState(@RequestParam(value = "name") String name) {
-        return new ResponseEntity<Room>((houseService.getHouse().getRoom(name)), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>((houseService.getHouse().getRoom(name)), HttpStatus.ACCEPTED);
     }
 
     @ExceptionHandler(NotAllowedActionExeption.class)
     public ResponseEntity<ErrorApi>
     handleNotAllowedActionException(NotAllowedActionExeption ex) {
         LOGGER.error(ex.getMessage(), ex);
-        return new ResponseEntity<ErrorApi>(new ErrorApi("400", ex.getMessage()),
+        return new ResponseEntity<>(new ErrorApi("400", ex.getMessage()),
                 HttpStatus.BAD_REQUEST);
     }
 

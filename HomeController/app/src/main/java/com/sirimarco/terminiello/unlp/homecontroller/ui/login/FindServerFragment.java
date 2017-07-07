@@ -1,11 +1,11 @@
-package com.sirimarco.terminiello.unlp.homecontroller.login;
+package com.sirimarco.terminiello.unlp.homecontroller.ui.login;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,15 +18,20 @@ import android.widget.TextView;
 
 import com.sirimarco.terminiello.unlp.homecontroller.R;
 import com.sirimarco.terminiello.unlp.homecontroller.connect.ObtainIpServerTask;
+import com.sirimarco.terminiello.unlp.homecontroller.model.Confite;
 import com.sirimarco.terminiello.unlp.homecontroller.model.IpDeviceInfo;
-import com.sirimarco.terminiello.unlp.homecontroller.utils.ThradUtils;
+import com.sirimarco.terminiello.unlp.homecontroller.model.NetworkData;
+import com.sirimarco.terminiello.unlp.homecontroller.ui.home.HomeActivity;
+import com.sirimarco.terminiello.unlp.homecontroller.utils.GenerateUrlServer;
+import com.sirimarco.terminiello.unlp.homecontroller.utils.HttpUtils;
+import com.sirimarco.terminiello.unlp.homecontroller.utils.ThreadUtils;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.ToolsConnectionsInterface;
 import com.skyfishjy.library.RippleBackground;
 
 import java.util.List;
 
 //FIXME TODO para que no quede un quilombo de hilos se tendria que hacer un wmUtils y que se maneje todo ahi y fue
-public class FindServerFragment extends Fragment implements ToolsConnectionsInterface<String> {
+public class FindServerFragment extends Fragment implements ToolsConnectionsInterface<String>,NetworkDataDialogFragment.InfoDialogListener {
 
     private static final String NETWORK_SSID =  "\"" + "RPi_SERVER" + "\"";
     private static final String NETWORK_PASS = "\"" + "ladesiempre" + "\"";
@@ -72,12 +77,13 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
             }
         });
         txtInfo.setText(R.string.searchServer);
+        rippleBackground.setVisibility(View.VISIBLE);
         rippleBackground.startRippleAnimation();
         if (!wm.isWifiEnabled()) {
             wm.setWifiEnabled(true);
         }
         obtainIpServerTask = new ObtainIpServerTask(this);
-        ThradUtils.executedRunnable(new Runnable() {
+        ThreadUtils.executedRunnable(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -99,7 +105,7 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
     }
 
     private void showRetryButton() {
-        ThradUtils.executeOnUIThread(this, new Runnable() {
+        ThreadUtils.executeOnUIThread(this, new Runnable() {
             @Override
             public void run() {
                 rippleBackground.stopRippleAnimation();
@@ -112,7 +118,7 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
     private void connectWiFiServer() {
         txtInfo.setText(R.string.connectToServerWifi);
         if(findNetworkConfigAndConnec()){
-            ThradUtils.executedRunnable(new Runnable() {
+            ThreadUtils.executedRunnable(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -146,7 +152,7 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
     }
 
     public void checkWifiServerEnable() {
-        ThradUtils.executeOnUIThread(this, new Runnable() {
+        ThreadUtils.executeOnUIThread(this, new Runnable() {
             @Override
             public void run() {
                 if (wm.getConnectionInfo() == null || wm.getConnectionInfo().getNetworkId() < 0) {
@@ -169,11 +175,7 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
 
     private void showDialogConnectWifiServer() {
         AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(getContext());
-        }
+        builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
         builder.setTitle(R.string.noServerInNetwork);
         builder.setMessage(R.string.noServerInNetworkDescription);
         builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
@@ -200,18 +202,19 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
     @Override
     public void onFinish(final String info) {
         obtainIpServerTask.cancel(true);
-        ThradUtils.executeOnUIThread(this, new Runnable() {
+        ThreadUtils.executeOnUIThread(this, new Runnable() {
             @Override
             public void run() {
                 rippleBackground.stopRippleAnimation();
                 if (info != null) {
-                    if (isWifiOfServer()){
-                        //showdialog
-                    }else{
-                        //next fragment
-                    }
-                    txtIp.setText(info);
+                    Confite.getInstance().setIpServer(info);
                     rippleBackground.setVisibility(View.GONE);
+                    if (isWifiOfServer()){
+                        showDialogNetwork();
+                    }else{
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        getActivity().startActivity(intent);
+                    }
                 } else {
                     if (firstFailServerFind) {
                         firstFailServerFind = false;
@@ -225,4 +228,26 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
         });
     }
 
+    @Override
+    public void networkDataReciver(final NetworkData networkData) {
+        HttpUtils.excutedUrl(GenerateUrlServer.getAddNetworkUrl(networkData));
+        txtIp.setText(R.string.infoReconnect);
+        ThreadUtils.executedRunnable(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(240000);
+                    tryConnectToServer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void showDialogNetwork(){
+        NetworkDataDialogFragment networkDataDialogFragment = new NetworkDataDialogFragment();
+        networkDataDialogFragment.setInfoDialogListener(this);
+        networkDataDialogFragment.show(getActivity().getFragmentManager(),null);
+    }
 }

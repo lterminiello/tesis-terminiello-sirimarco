@@ -1,4 +1,4 @@
-package com.sirimarco.terminiello.unlp.homecontroller.login;
+package com.sirimarco.terminiello.unlp.homecontroller.ui.login;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;

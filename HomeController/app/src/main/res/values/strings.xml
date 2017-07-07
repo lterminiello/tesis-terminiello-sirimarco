@@ -9,5 +9,9 @@
     <string name="noServerInNetwork">No se encontro servidor activo</string>
     <string name="noServerInNetworkDescription">No hemos encontrado un servidor activo en su red. Si es la primera vez que enciende el servidor, precione aceptar para empezar el proceso de configuracion. Sino reintente la busqueda.</string>
     <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ssid">Nombre de la red</string>
+    <string name="psk">Contraseña de la red</string>
+    <string name="infoReconnect">El servidor se esta terminando de configurar, cuando la luz verde este encendia significa que ya esta conectado a la red. Esto llevara unos minutos</string>
 
 </resources>

@@ -3,7 +3,7 @@ package com.sirimarco.terminiello.unlp.homecontroller.utils;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
-public class ThradUtils {
+public class ThreadUtils {
 
     public static void executeOnUIThread(Fragment fragment, Runnable runnable) {
         Activity activity = fragment.getActivity();

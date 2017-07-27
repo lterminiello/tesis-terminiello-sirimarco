@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.sirimarco.terminiello.unlp.homecontroller.R;
+import com.sirimarco.terminiello.unlp.homecontroller.json.JsonFactory;
+import com.sirimarco.terminiello.unlp.homecontroller.model.House;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.GenerateUrlServer;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.HttpUtils;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.ThreadUtils;
@@ -22,6 +25,13 @@ import okhttp3.Response;
 public class HomeFragment extends Fragment implements Callback {
 
     private TextView textView;
+    private JsonFactory jsonFactory;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        jsonFactory = new JsonFactory();
+    }
 
     @Nullable
     @Override
@@ -45,6 +55,7 @@ public class HomeFragment extends Fragment implements Callback {
         ThreadUtils.executeOnUIThread(this, new Runnable() {
             @Override
             public void run() {
+                House house = jsonFactory.fromJson(data,new TypeReference<House>(){});
                 textView.setText(data);
             }
         });

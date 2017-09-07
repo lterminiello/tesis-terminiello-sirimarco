@@ -2,7 +2,9 @@ package com.sirimarco.terminiello.unlp.homecontroller.ui.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +26,11 @@ import okhttp3.Response;
 
 public class HomeFragment extends Fragment implements Callback {
 
-    private TextView textView;
     private JsonFactory jsonFactory;
+    private TabLayout tabLayout;
+    private ViewPager mViewPager;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,11 +38,14 @@ public class HomeFragment extends Fragment implements Callback {
         jsonFactory = new JsonFactory();
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
-        textView = view.findViewById(R.id.info);
+        tabLayout = view.findViewById(R.id.tabs);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mViewPager = view.findViewById(R.id.pager);
 
         HttpUtils.excutedUrl(GenerateUrlServer.getHouseSchemeUrl(), this);
 
@@ -52,11 +60,15 @@ public class HomeFragment extends Fragment implements Callback {
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         final String data = response.body().string();
+        House house = jsonFactory.fromJson(data,new TypeReference<House>(){});
+        final HomePagerAdapter homePagerAdapter= new HomePagerAdapter(getFragmentManager(),house);
+
         ThreadUtils.executeOnUIThread(this, new Runnable() {
             @Override
             public void run() {
-                House house = jsonFactory.fromJson(data,new TypeReference<House>(){});
-                textView.setText(data);
+                mViewPager.setAdapter(homePagerAdapter);
+                tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                tabLayout.setupWithViewPager(mViewPager);
             }
         });
     }

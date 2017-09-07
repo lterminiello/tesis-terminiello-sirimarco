@@ -30,7 +30,8 @@ import com.skyfishjy.library.RippleBackground;
 
 import java.util.List;
 
-//FIXME TODO para que no quede un quilombo de hilos se tendria que hacer un wmUtils y que se maneje todo ahi y fue
+//FIXME  Para que no quede un quilombo de hilos se tendria que hacer un wmUtils y que se maneje todo ahi y fue
+//TODO claramente lo voy a hacer villero
 public class FindServerFragment extends Fragment implements ToolsConnectionsInterface<String>,NetworkDataDialogFragment.InfoDialogListener {
 
     private static final String NETWORK_SSID =  "\"" + "RPi_SERVER" + "\"";
@@ -65,7 +66,12 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
         ipDeviceInfo = new IpDeviceInfo(ipRed, ipMask, ip);
 
         tryConnectToServer();
+
         return view;
+    }
+
+    private void serverAvailability(){
+
     }
 
     private void tryConnectToServer() {
@@ -82,7 +88,7 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
         if (!wm.isWifiEnabled()) {
             wm.setWifiEnabled(true);
         }
-        obtainIpServerTask = new ObtainIpServerTask(this);
+        obtainIpServerTask = new ObtainIpServerTask(this,Confite.getInstance().getIpServer(getActivity()));
         ThreadUtils.executedRunnable(new Runnable() {
             @Override
             public void run() {
@@ -200,21 +206,16 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
     }
 
     @Override
-    public void onFinish(final String info) {
+    public void onFinish(final String ipServer) {
         obtainIpServerTask.cancel(true);
         ThreadUtils.executeOnUIThread(this, new Runnable() {
             @Override
             public void run() {
                 rippleBackground.stopRippleAnimation();
-                if (info != null) {
-                    Confite.getInstance().setIpServer(info);
+                if (ipServer != null) {
+                    Confite.getInstance().setIpServer(getActivity(),ipServer);
                     rippleBackground.setVisibility(View.GONE);
-                    if (isWifiOfServer()){
-                        showDialogNetwork();
-                    }else{
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                        getActivity().startActivity(intent);
-                    }
+                    startHomeActivity();
                 } else {
                     if (firstFailServerFind) {
                         firstFailServerFind = false;
@@ -226,6 +227,15 @@ public class FindServerFragment extends Fragment implements ToolsConnectionsInte
                 }
             }
         });
+    }
+
+    private void startHomeActivity(){
+        if (isWifiOfServer()){
+            showDialogNetwork();
+        }else{
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            getActivity().startActivity(intent);
+        }
     }
 
     @Override

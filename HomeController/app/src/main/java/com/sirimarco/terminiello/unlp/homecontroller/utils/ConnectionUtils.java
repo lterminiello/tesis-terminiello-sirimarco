@@ -1,6 +1,8 @@
 package com.sirimarco.terminiello.unlp.homecontroller.utils;
 
 
+import com.sirimarco.terminiello.unlp.homecontroller.model.Confite;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -20,6 +22,10 @@ public class ConnectionUtils {
             baseIp++;
         }
         return null;
+    }
+
+    public static boolean isServerAvailability(String host){
+        return isReachableByTcp(host, Integer.valueOf(Confite.getPORT()), 1000);
     }
 
     private static boolean isReachableByTcp(String host, int port, int timeout) {

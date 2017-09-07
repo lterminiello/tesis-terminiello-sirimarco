@@ -25,8 +25,4 @@ public class ControllerDimmerRasp implements ControllerDimmerInterface {
 
     }
 
-    @Override
-    public void off(Artifact artifact) {
-
-    }
 }

@@ -30,10 +30,4 @@ public class ControllerDimmerNodeMCU extends AbstractControllerNodeMcu implement
         state = pwd.toString();
     }
 
-    @Override
-    public void off(Artifact artifact) {
-        HttpClientService httpClientService = ApplicationContextProvider.getApplicationContext().getBean("httpClientService", HttpClientService.class);
-        httpClientService.getResponceFromGet(getUrlWithArtifact(artifact, "off",null));
-        state = "off";
-    }
 }

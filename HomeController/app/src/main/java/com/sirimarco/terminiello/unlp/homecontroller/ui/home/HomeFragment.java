@@ -61,6 +61,9 @@ public class HomeFragment extends Fragment implements Callback {
     public void onResponse(Call call, Response response) throws IOException {
         final String data = response.body().string();
         House house = jsonFactory.fromJson(data,new TypeReference<House>(){});
+
+        //TODO si es vacio tirar un activity for result hacer toda la configuracion de la casa mandarla al server y la respues devolverla a esta activity
+
         final HomePagerAdapter homePagerAdapter= new HomePagerAdapter(getFragmentManager(),house);
 
         ThreadUtils.executeOnUIThread(this, new Runnable() {

@@ -1,5 +1,6 @@
 package com.sirimarco.terminiello.unlp.homecontroller.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.sirimarco.terminiello.unlp.homecontroller.R;
 import com.sirimarco.terminiello.unlp.homecontroller.json.JsonFactory;
 import com.sirimarco.terminiello.unlp.homecontroller.model.House;
+import com.sirimarco.terminiello.unlp.homecontroller.ui.config.ConfigHouseActivity;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.GenerateUrlServer;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.HttpUtils;
 import com.sirimarco.terminiello.unlp.homecontroller.utils.ThreadUtils;
@@ -29,7 +31,6 @@ public class HomeFragment extends Fragment implements Callback {
     private JsonFactory jsonFactory;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-
 
 
     @Override
@@ -60,19 +61,26 @@ public class HomeFragment extends Fragment implements Callback {
     @Override
     public void onResponse(Call call, Response response) throws IOException {
         final String data = response.body().string();
-        House house = jsonFactory.fromJson(data,new TypeReference<House>(){});
+        House house = jsonFactory.fromJson(data, new TypeReference<House>() {
+        });
 
         //TODO si es vacio tirar un activity for result hacer toda la configuracion de la casa mandarla al server y la respues devolverla a esta activity
 
-        final HomePagerAdapter homePagerAdapter= new HomePagerAdapter(getFragmentManager(),house);
 
-        ThreadUtils.executeOnUIThread(this, new Runnable() {
-            @Override
-            public void run() {
-                mViewPager.setAdapter(homePagerAdapter);
-                tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-                tabLayout.setupWithViewPager(mViewPager);
-            }
-        });
+        if (house.getRooms() != null) {
+            final HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getFragmentManager(), house);
+            ThreadUtils.executeOnUIThread(this, new Runnable() {
+                @Override
+                public void run() {
+                    mViewPager.setAdapter(homePagerAdapter);
+                    tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                    tabLayout.setupWithViewPager(mViewPager);
+                }
+            });
+        } else {
+            Intent intent = new Intent(getActivity(), ConfigHouseActivity.class);
+            intent.putExtra("HOUSE",house);
+            getActivity().startActivity(intent);
+        }
     }
 }

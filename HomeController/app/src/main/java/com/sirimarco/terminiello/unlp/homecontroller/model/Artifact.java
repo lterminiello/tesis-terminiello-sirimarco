@@ -53,6 +53,6 @@ public class Artifact implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return this.name.equals(((Artifact) obj).getName());
+        return this.name.equals(((Artifact) obj).getName()) && this.idBoard.equals(((Artifact) obj).getIdBoard()) && this.pin.equals(((Artifact) obj).getPin());
     }
 }

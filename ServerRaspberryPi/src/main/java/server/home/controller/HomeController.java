@@ -31,7 +31,7 @@ public class HomeController {
                                              @RequestParam(value = "power", required = false) Integer power) {
         Artifact artifact = houseService.getHouse().getRoom(roomName).getArtifact(arctifactName);
         String response = artifact.runAction(action, power);
-        LOGGER.info(response.toString());
+        LOGGER.info(response);
         return new ResponseEntity<>((response), HttpStatus.ACCEPTED);
     }
 

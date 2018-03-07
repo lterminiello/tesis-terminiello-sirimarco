@@ -1,0 +1,6 @@
+
+<squid:S1185"(Remove this method to simply inherit it.(¥Ë©
+`squid:UselessImportCheck"2Remove this unused import 'android.widget.Button'.(²òžýÿÿÿÿ8úŠµ•Ÿ,
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï‚ ‚8¡“÷–Ÿ,
+usquid:S1450"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ýÿÿÿÿ
+Ksquid:S1066"/Merge this if statement with the enclosing one.(ÈÉ¿ù8Ýõ…”Ÿ,

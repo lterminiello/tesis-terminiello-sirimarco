@@ -1,0 +1,4 @@
+
+csquid:MaximumInheritanceDepth"<This class has 8 parents which is greater than 5 authorized.(Æ¼¾Î
+|squid:S1450"[Remove the "homeFragment" field and declare it as a local variable in the relevant methods.(ëŒó¨üÿÿÿÿ8Ä×ð–Ÿ,
+`squid:UselessImportCheck"9Remove this unused import 'android.os.PersistableBundle'.(Ñƒ¨’øÿÿÿÿ

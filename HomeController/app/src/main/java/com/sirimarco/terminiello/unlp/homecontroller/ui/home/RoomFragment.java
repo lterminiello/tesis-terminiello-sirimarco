@@ -1,6 +1,7 @@
 package com.sirimarco.terminiello.unlp.homecontroller.ui.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sirimarco.terminiello.unlp.homecontroller.R;
 import com.sirimarco.terminiello.unlp.homecontroller.model.Room;
+import com.sirimarco.terminiello.unlp.homecontroller.ui.config.ConfigHouseActivity;
 
 public class RoomFragment extends Fragment {
 

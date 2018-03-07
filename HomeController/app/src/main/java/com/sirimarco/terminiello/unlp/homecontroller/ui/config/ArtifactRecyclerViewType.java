@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sirimarco.terminiello.unlp.homecontroller.R;
@@ -15,20 +16,22 @@ import com.sirimarco.terminiello.unlp.homecontroller.utils.RecyclerViewType;
  * Created by default on 10/09/17.
  */
 
-public class ArtifactRecyclerViewType extends RecyclerViewType<Artifact,ArtifactRecyclerViewType.ArtifactViewHolder> {
+public class ArtifactRecyclerViewType extends RecyclerViewType<Artifact, ArtifactRecyclerViewType.ArtifactViewHolder> {
 
-    public interface OnLongClickArtifactListener{
-        void onLongClickArtifact(Artifact artifact,int pos);
+    public interface OnClickArtifactListener {
+        void onClickDeleteArtifact(Artifact artifact, int pos);
+
+        void onClickEditArtifact(Artifact artifact, int pos);
     }
 
     private Activity activity;
     private Context context;
-    private OnLongClickArtifactListener onLongClickArtifactListener;
+    private OnClickArtifactListener listener;
 
-    public ArtifactRecyclerViewType(Activity activity,Context context,OnLongClickArtifactListener onLongClickArtifactListener) {
+    public ArtifactRecyclerViewType(Activity activity, Context context, OnClickArtifactListener onClickArtifactListener) {
         this.activity = activity;
         this.context = context;
-        this.onLongClickArtifactListener = onLongClickArtifactListener;
+        this.listener = onClickArtifactListener;
     }
 
     @Override
@@ -39,7 +42,10 @@ public class ArtifactRecyclerViewType extends RecyclerViewType<Artifact,Artifact
     @Override
     public RecyclerView.ViewHolder createViewHolderFromView(View view) {
         ArtifactViewHolder holder = new ArtifactViewHolder(view);
-        holder.textView = findView(view,R.id.artifactName);
+        holder.textView = findView(view, R.id.artifactName);
+        holder.icon = findView(view, R.id.artifactIcon);
+        holder.edit = findView(view, R.id.artifactEdit);
+        holder.delete = findView(view, R.id.artifactDelete);
 
         return holder;
     }
@@ -47,13 +53,33 @@ public class ArtifactRecyclerViewType extends RecyclerViewType<Artifact,Artifact
     @Override
     public void fillHolderFromItem(final Artifact artifact, final ArtifactViewHolder holder) {
         holder.textView.setText(artifact.getName());
-        holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                onLongClickArtifactListener.onLongClickArtifact(artifact,holder.getAdapterPosition());
-                return true;
+            public void onClick(View v) {
+                listener.onClickDeleteArtifact(artifact, holder.getAdapterPosition());
             }
         });
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickEditArtifact(artifact, holder.getAdapterPosition());
+            }
+        });
+        holder.icon.setVisibility(View.VISIBLE);
+        switch (artifact.getTypeArtifact()) {
+            case LIGHT:
+                holder.icon.setImageResource(R.drawable.bulb_on);
+                break;
+            case DIMMER:
+                holder.icon.setImageResource(R.drawable.bulb_on);
+                break;
+            case OTHER:
+                holder.icon.setImageResource(R.drawable.button_other);
+                break;
+            default:
+                holder.icon.setVisibility(View.GONE);
+        }
+
     }
 
     @NonNull
@@ -78,9 +104,13 @@ public class ArtifactRecyclerViewType extends RecyclerViewType<Artifact,Artifact
 
     }
 
-    public static class  ArtifactViewHolder extends RecyclerView.ViewHolder {
+    public static class ArtifactViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView;
+        private ImageView icon;
+        private ImageView edit;
+        private ImageView delete;
+
 
         public ArtifactViewHolder(View itemView) {
             super(itemView);

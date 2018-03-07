@@ -1,0 +1,7 @@
+
+Fsquid:S1068"1Remove this unused "stateArtifact" private field.(¤éŞ€
+qsquid:S1450"\Remove the "stateArtifact" field and declare it as a local variable in the relevant methods.(¤éŞ€
+esquid:S1206"PThis class overrides "equals()" and should therefore also override "hashCode()".(ÜÑã
+4squid:S2097"Add a type test to this method.(ÜÑã
+Usquid:S2259"AA "NullPointerException" could be thrown; "obj" is nullable here.(Èåª$
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(£ÏÄ‰ûÿÿÿÿ

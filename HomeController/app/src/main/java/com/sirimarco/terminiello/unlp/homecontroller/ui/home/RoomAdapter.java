@@ -91,7 +91,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomItemViewHo
         });
     }
 
-    //Hablame de villero
+    //Hablame de villero un swich ni en pedo
     private void showCorrectCard(TypeArtifact typeArtifact, RoomItemViewHolder holder) {
         if (TypeArtifact.LIGHT.equals(typeArtifact)) {
             holder.cardLuz.setVisibility(View.VISIBLE);

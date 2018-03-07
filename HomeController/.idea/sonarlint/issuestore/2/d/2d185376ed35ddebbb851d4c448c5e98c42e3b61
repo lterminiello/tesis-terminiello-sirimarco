@@ -1,0 +1,8 @@
+
+‹squid:UselessImportCheck"]Remove this unused import 'com.sirimarco.terminiello.unlp.homecontroller.model.TypeArtifact'.(’²Şÿÿÿÿÿ8°òñ”Ÿ,
+rsquid:S1450"XRemove the "btnCancel" field and declare it as a local variable in the relevant methods.(ˆ½öêúÿÿÿÿ
+asquid:UselessImportCheck"3Remove this unused import 'android.widget.Spinner'.(¸£ÃØüÿÿÿÿ8®ë”Ÿ,
+=squid:S1185"(Remove this method to simply inherit it.(ßìê¯
+msquid:S1450"XRemove the "btnAccept" field and declare it as a local variable in the relevant methods.(Í¯°µ
+fsquid:UselessImportCheck"8Remove this unused import 'android.widget.ArrayAdapter'.( €ŠÑÿÿÿÿÿ8¥¥ï”Ÿ,
+‹squid:UselessImportCheck"]Remove this unused import 'com.sirimarco.terminiello.unlp.homecontroller.model.PinRaspberry'.(ªÆú¼øÿÿÿÿ8°òñ”Ÿ,

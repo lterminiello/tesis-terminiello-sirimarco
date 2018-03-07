@@ -1,0 +1,6 @@
+
+=squid:S1185"(Remove this method to simply inherit it.(ßìê¯
+tsquid:S1450"XRemove the "typeArray" field and declare it as a local variable in the relevant methods.(Á±µ8§¬È”Ÿ,
+xsquid:S1450"WRemove the "pinArray" field and declare it as a local variable in the relevant methods.(Ùá‡ùøÿÿÿÿ8§¬È”Ÿ,
+ysquid:S1450"XRemove the "btnCancel" field and declare it as a local variable in the relevant methods.(ˆ½öêúÿÿÿÿ8¥–÷“Ÿ,
+tsquid:S1450"XRemove the "btnAccept" field and declare it as a local variable in the relevant methods.(Í¯°µ8¥–÷“Ÿ,

@@ -1,0 +1,13 @@
+
+Ysquid:UnusedPrivateMethod"7Remove this unused private "serverAvailability" method.(‰ÀºP
+Fsquid:S1313",Make this IP "0.0.0.0" address configurable.(ç›—åüÿÿÿÿ
+Lsquid:S1135"2Complete the task associated to this TODO comment.(áïŽàùÿÿÿÿ
+Lsquid:S1135"2Complete the task associated to this TODO comment.(“ã’òüÿÿÿÿ
+^squid:S1134"DTake the required action to fix the issue indicated by this comment.(áïŽàùÿÿÿÿ
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+[squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+•squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‰ÀºP
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ

@@ -1,7 +1,9 @@
 package com.sirimarco.terminiello.unlp.homecontroller.utils;
 
+import com.sirimarco.terminiello.unlp.homecontroller.json.JsonFactory;
 import com.sirimarco.terminiello.unlp.homecontroller.model.Artifact;
 import com.sirimarco.terminiello.unlp.homecontroller.model.Confite;
+import com.sirimarco.terminiello.unlp.homecontroller.model.House;
 import com.sirimarco.terminiello.unlp.homecontroller.model.NetworkData;
 import com.sirimarco.terminiello.unlp.homecontroller.model.Room;
 
@@ -21,5 +23,10 @@ public class GenerateUrlServer {
                 + "&arctifactName=" + artifact.getName()
                 + "&action=" + action
                 + "&power=" + power;
+    }
+
+    public static String setHouseSchemeUrl(House house) {
+        JsonFactory jsonFactory = new JsonFactory();
+        return "http://" + Confite.getInstance().getIpServer() + ":" + Confite.getPORT() + "/house/houseScheme?scheme=" + jsonFactory.toJson(house);
     }
 }

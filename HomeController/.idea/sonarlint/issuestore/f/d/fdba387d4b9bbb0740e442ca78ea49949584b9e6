@@ -1,0 +1,4 @@
+
+esquid:S1206"PThis class overrides "equals()" and should therefore also override "hashCode()".(ЌЬСг
+4squid:S2097"Add a type test to this method.(ЌЬСг
+Usquid:S2259"AA "NullPointerException" could be thrown; "obj" is nullable here.(шР‡O

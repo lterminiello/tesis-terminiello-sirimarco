@@ -1,0 +1,5 @@
+
+‘squid:UselessImportCheck"hRemove this unused import 'com.sirimarco.terminiello.unlp.homecontroller.ui.config.ConfigHouseActivity'.(ªÏ¡œ8Ôâç—Ÿ,
+tsquid:S1845"_Rename field "room" to prevent any misunderstanding/clash with field "ROOM" defined on line 24.(ÑðæÔ
+usquid:S1450"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ýÿÿÿÿ
+[squid:UselessImportCheck"3Remove this unused import 'android.content.Intent'.(³ð‹G8Ôâç—Ÿ,

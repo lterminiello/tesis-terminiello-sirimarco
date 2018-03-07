@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginTop="4dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
-    <TextView
+    <ImageView
+        android:id="@+id/artifactIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textSize="16sp"/>
+        android:src="@drawable/ic_close" />
+
     <TextView
         android:id="@+id/artifactName"
-        android:layout_marginLeft="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/artifactIcon"
         android:text="Name"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/artifactDelete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_close"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/artifactEdit"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@id/artifactDelete"
+        android:src="@drawable/ic_edit"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>
